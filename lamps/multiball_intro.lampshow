@@ -1,0 +1,81 @@
+#################################################X|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
+lamp:gameOverBackBox                                 | 
+lamp:matchBackBox                                 | 
+lamp:ballInPlayBackBox                                | 
+lamp:mouth1LeftBackBox                                | 
+lamp:mouth2BackBox                                | 
+lamp:mouth3BackBox                              | 
+lamp:mouth4BackBox                                    | 
+lamp:mouth5RightBackBox                                  | 
+lamp:x2Bonus                                    | 
+lamp:x3Bonus                                    | 
+lamp:x4Bonus                                    | 
+lamp:x5Bonus                                    | 
+lamp:eject25K                           | 
+lamp:eject50K                             | 
+lamp:eject75K                                | 
+lamp:ejectLightExtraBall                                | 
+lamp:dropTargetTimerLamp                                  | 
+lamp:advancePlanent                                  | 
+lamp:pluto                                  | 
+lamp:neptune                                  | 
+lamp:uranus                                  | 
+lamp:saturn                                  | 
+lamp:jupiter                                  | 
+lamp:mars                                  | 
+lamp:earth                                  | 
+lamp:venus                          | 
+lamp:mercury                           | 
+lamp:yellow1Top                            | 
+lamp:yellow2                               | 
+lamp:yellow3                         | 
+lamp:yellow4                               | 
+lamp:yellow5Bottom                                 | 
+lamp:shootAgain                                     | 
+lamp:scoreEnergy                                     | 
+lamp:solarEnergyValue                                     | 
+lamp:blue1Top                                     | 
+lamp:blue2                                     | 
+lamp:yellow5Bottom                                    | 
+lamp:scoreEnergy                                    | 
+lamp:solarEnergyValue                                    | 
+lamp:dropTarget1Top                                 | 
+lamp:dropTarget2Middle                                | 
+lamp:dropTarget3Bottom                               | 
+lamp:amber1Top                           | 
+lamp:amber2                              | 
+lamp:amber3                            | 
+lamp:amber4                              | 
+lamp:amber5Bottom                           | 
+lamp:leftOutLaneExtraBall                               | 
+lamp:leftInLaneExtraBall                               | 
+lamp:specialLamp                                  | 
+lamp:green1Top                                  | 
+lamp:green2                             | 
+lamp:green3                          | 
+lamp:green4                               | 
+lamp:green5Bottom                            | 
+lamp:rightOutLaneExtraBall                              | 
+lamp:rightInLaneExtraBall                                   | 
+lamp:notUsedLamp83                                   | 
+lamp:red1Top                                   | 
+lamp:red2                                   | 
+lamp:red3                                   | 
+lamp:red4                                   | 
+lamp:red5Bottom                                   | 
+coil:quakeMotor                                 | [ ][      >                                               [     ][      >                                                                        [ ][      >                                                                                      [        ][      >                                        [          ][          >    [         >
+coil:feedShooter_UpperPFFLash | 
+coil:dropTargetReset_RightInsertBDFlasher              | 
+coil:raiseRamp__LowerPFTop1Flasher        | 
+coil:lowerRamp_EnergyFlashers              | 
+coil:outholeKicker_Knocker              | 
+coil:singleEjectHole_LeftInsertBDFlasher        | 
+coil:leftEyeballEject_LeftPlayfieldFlasher                 | 
+coil:rightEyeballEject_SunFlasher                  | 
+coil:giUpper                                    |                                                                  .....     ..   .........          ....     .....  ...                                          .....        ..         ....  .. .          ....   ....                                     ........         ..............      ..    ...  ..       ... .. .   .......   ........
+coil:giLower                                    |                                                                .....     ..   .........          ....     .....  ...                                          .....        ..         ....  .. .          ....   ....                                     ........         ..............      ..    ...  ..       ... .. .   .......   ........
+coil:giBackbox                                  |                                                              .....     ..   .........          ....     .....  ...                                          .....        ..         ....  .. .          ....   ....                                     ........         ..............      ..    ...  ..       ... .. .   .......   ........
+coil:top4CenterFlashers                    | 
+coil:backboxLightingR                           | .   .    ..                                                   . ..   . 
+coil:backboxLightingG                           |  ..    .                                                    .      .  .
+coil:backboxLightingB                           |    . .. .                                                    . .  . .                                                                          [ ][      >                                                                                      [        ][      >                                        [          ][      >           [      >

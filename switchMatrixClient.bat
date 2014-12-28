@@ -1,0 +1,1 @@
+python switchMatrixClient.py -y config/pinbot.yaml -p 9000
