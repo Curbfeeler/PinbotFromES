@@ -1,4 +1,3 @@
-earthshaker-aftershock
+PinbotFromES, a redo of earthshaker-aftershock
 ======================
-
-Scott Danesi's Earthshaker Aftershock Project
+Pinbot by Dan Myers, based on Scott Danesi's Earthshaker Aftershock Project
