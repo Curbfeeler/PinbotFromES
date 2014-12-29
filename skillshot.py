@@ -60,21 +60,21 @@ class SkillshotMode(game.Mode):
 			self.stopSkillshotLamps()
 		
 	def startSkillshotLamps(self):
-		self.game.lamps.gameOverBackBox.schedule(schedule=0x0000000F, cycle_seconds=0, now=False)
-		self.game.lamps.matchBackBox.schedule(schedule=0x000000F0, cycle_seconds=0, now=False)
-		self.game.lamps.ballInPlayBackBox.schedule(schedule=0x00000F00, cycle_seconds=0, now=False)
-		self.game.lamps.mouth1LeftBackBox.schedule(schedule=0x0000F000, cycle_seconds=0, now=False)
-		self.game.lamps.mouth2BackBox.schedule(schedule=0x000F0000, cycle_seconds=0, now=False)
-		self.game.lamps.mouth3BackBox.schedule(schedule=0xCCC00000, cycle_seconds=0, now=False)
+		#self.game.lamps.gameOverBackBox.schedule(schedule=0x0000000F, cycle_seconds=0, now=False)
+		#self.game.lamps.matchBackBox.schedule(schedule=0x000000F0, cycle_seconds=0, now=False)
+		#self.game.lamps.ballInPlayBackBox.schedule(schedule=0x00000F00, cycle_seconds=0, now=False)
+		#self.game.lamps.mouth1LeftBackBox.schedule(schedule=0x0000F000, cycle_seconds=0, now=False)
+		#self.game.lamps.mouth2BackBox.schedule(schedule=0x000F0000, cycle_seconds=0, now=False)
+		self.game.lamps.blue4.schedule(schedule=0xCCC00000, cycle_seconds=0, now=False)
 		#self.game.coils.outholeKicker_Knocker.schedule(schedule=0x00C00000, cycle_seconds=0, now=False)
 
 	def stopSkillshotLamps(self):
-		self.game.lamps.gameOverBackBox.disable()
-		self.game.lamps.matchBackBox.disable()
-		self.game.lamps.ballInPlayBackBox.disable()
-		self.game.lamps.mouth1LeftBackBox.disable()
-		self.game.lamps.mouth2BackBox.disable()
-		self.game.lamps.mouth3BackBox.disable()
+		#self.game.lamps.gameOverBackBox.disable()
+		#self.game.lamps.matchBackBox.disable()
+		#self.game.lamps.ballInPlayBackBox.disable()
+		#self.game.lamps.mouth1LeftBackBox.disable()
+		#self.game.lamps.mouth2BackBox.disable()
+		self.game.lamps.blue3.disable()
 		#self.game.coils.outholeKicker_Knocker.disable()
 
 	##############################
