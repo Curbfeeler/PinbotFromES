@@ -5,20 +5,6 @@
 ###################################################################################
 # Markers:                                       |        8      16      24      32
 # Frames:                                        | 12345678123456781234567812345678
-###################################################################################
-# Driver group: Flashers
-###################################################################################
-coil:outholeKicker_Knocker              |         .                       
-coil:feedShooter_UpperPFFLash |            ..                   
-coil:dropTargetReset_RightInsertBDFlasher              |           .                     
-coil:raiseRamp__LowerPFTop1Flasher        |         .                       
-coil:lowerRamp_EnergyFlashers              |     .                           
-coil:singleEjectHole_LeftInsertBDFlasher        |            .                    
-coil:leftEyeballEject_LeftPlayfieldFlasher                 |            ..                   
-coil:rightEyeballEject_SunFlasher                  |             .                   
-coil:top3Flashers                             |        ..                       
-coil:top4CenterFlashers                    |         ..                      
-###################################################################################
 # Driver group: Jackpot
 ###################################################################################
 lamp:rightInLaneExtraBall                                   |                                 
@@ -31,9 +17,6 @@ lamp:red5Bottom                                   |               .
 ###################################################################################
 # Driver group: Captive
 ###################################################################################
-lamp:gameOverBackBox                                 |     ..                          
-lamp:matchBackBox                                 |      .                          
-lamp:ballInPlayBackBox                                |      ..                         
 lamp:mouth1LeftBackBox                                |       .                         
 lamp:mouth2BackBox                                |       ..                        
 lamp:mouth3BackBox                              |        .                        

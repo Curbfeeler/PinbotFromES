@@ -49,19 +49,19 @@ class Mode1(game.Mode):
 
 	def sw_jetTop_active(self, sw):
 		self.game.sound.play('jet_super')
-		self.game.utilities.acFlashPulse(coilname='raiseRamp__LowerPFTop1Flasher',pulsetime=60)
+		self.game.utilities.acFlashPulse(coilname='raiseRamp_LowerPFTop1Flasher',pulsetime=60)
 		self.game.utilities.score(5000)
 		return procgame.game.SwitchStop
 
 	def sw_jetMiddle_active(self, sw):
 		self.game.sound.play('jet_super')
-		self.game.utilities.acFlashPulse(coilname='raiseRamp__LowerPFTop1Flasher',pulsetime=60)
+		self.game.utilities.acFlashPulse(coilname='raiseRamp_LowerPFTop1Flasher',pulsetime=60)
 		self.game.utilities.score(5000)
 		return procgame.game.SwitchStop
 
 	def sw_jetBottom_active(self, sw):
 		self.game.sound.play('jet_super')
-		self.game.utilities.acFlashPulse(coilname='raiseRamp__LowerPFTop1Flasher',pulsetime=60)
+		self.game.utilities.acFlashPulse(coilname='raiseRamp_LowerPFTop1Flasher',pulsetime=60)
 		self.game.utilities.score(5000)
 		return procgame.game.SwitchStop
 		

@@ -47,7 +47,7 @@ class UtilitiesMode(game.Mode):
 			self.ACNameArray.append('outholeKicker_Knocker')
 			self.ACNameArray.append('feedShooter_UpperPFFLash')
 			self.ACNameArray.append('dropTargetReset_RightInsertBDFlasher')
-			self.ACNameArray.append('raiseRamp__LowerPFTop1Flasher')
+			self.ACNameArray.append('raiseRamp_LowerPFTop1Flasher')
 			self.ACNameArray.append('lowerRamp_EnergyFlashers')
 			self.ACNameArray.append('singleEjectHole_LeftInsertBDFlasher')
 			self.ACNameArray.append('leftEyeballEject_LeftPlayfieldFlasher')

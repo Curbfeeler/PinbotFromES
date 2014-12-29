@@ -303,9 +303,9 @@ PRCoils:
     dropTargetReset_RightInsertBDFlasher:
         number: C04
         label: 'dropTargetReset_RightInsertBDFlasher'
-    raiseRamp__LowerPFTop1Flasher:
+    raiseRamp_LowerPFTop1Flasher:
         number: C05
-        label: 'raiseRamp__LowerPFTop1Flasher'
+        label: 'raiseRamp_LowerPFTop1Flasher'
     lowerRamp_EnergyFlashers:
         number: C06
         label: 'lowerRamp_EnergyFlashers'
