@@ -73,9 +73,8 @@ class BaseGameMode(game.Mode):
 
 		self.start_ball()
 		self.game.utilities.updateBaseDisplay()
-		self.game.sound.play('game_start_rev')
-		self.delay(delay=1.2,handler=self.game.sound.play,param='game_start')
-		self.game.sound.play('game_start')
+
+		#self.game.sound.play('game_start')
 
 
 		print "Game Started"
@@ -116,11 +115,12 @@ class BaseGameMode(game.Mode):
 		self.game.utilities.enableGI()
 
 		#### Start Shooter Lane Music ####
-		self.game.sound.play_music('shooter'+ str(self.game.ball),loops=1,music_volume=.5)
+		self.game.sound.play_music('shooter'+ str(self.game.ball),loops=10,music_volume=.5)
 		self.game.shooter_lane_status = 1
-
+		self.game.sound.play('player_'+str(self.game.current_player_index+1) +'_up_vox')
+		self.delay(delay=1.2,handler=self.game.sound.play,param='game_start')
 		#### Debug Info ####
-		print "Ball Started"
+		#print "Ball Started"
 
 	def finish_ball(self):
 		# Remove Drops mode because of delay issue #
@@ -386,8 +386,7 @@ class BaseGameMode(game.Mode):
 		# This will play the car take off noise when the ball leaves the shooter lane
 		if (self.game.utilities.get_player_stats('ball_in_play') == False):
 			self.game.sound.play('game_start_takeoff')
-			self.game.sound.stop_music()
-			self.game.sound.play_music('main'+ str(self.game.ball),loops=1,music_volume=.5)				
+		
 			
 
 	#############################

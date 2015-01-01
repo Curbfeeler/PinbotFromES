@@ -168,34 +168,34 @@ PRSwitches:
         number: S37
 ##################################
 # CHEST AND VISOR SWITCHES SWITCHES
-    chestHoriz1Yellow:
+    chestMatrix01:
         number: S44
         label: 'Chest Horiz Yellow'
-    chestHoriz2Blue:
+    chestMatrix02:
         number: S45
         label: 'Chest Horiz Blue'
-    chestHoriz3Orange:
+    chestMatrix03:
         number: S46
         label: 'Chest Horiz Orange'
-    chestHoriz4Green:
+    chestMatrix04:
         number: S47
         label: 'Chest Horiz Green'
-    chestHoriz5Red:
+    chestMatrix05:
         number: S48
         label: 'Chest Horiz Red'
-    chestVert1Yellow:
+    chestMatrix10:
         number: S51
         label: 'Chest Vert Yellow'
-    chestVert2Blue:
+    chestMatrix20:
         number: S52
         label: 'Chest Vert Blue'
-    chestVert3Orange:
+    chestMatrix30:
         number: S53
         label: 'Chest Vert Orange'
-    chestVert4Green:
+    chestMatrix40:
         number: S54
         label: 'Chest Vert Green'
-    chestVert5Red:
+    chestMatrix50:
         number: S55
         label: 'Chest Vert Red'
     visorOpen:
@@ -418,15 +418,15 @@ PRLamps:
         number: L42
     mercury:
         number: L43
-    yellow1Top:
+    chestMatrix11:
         number: L44
-    yellow2:
+    chestMatrix21:
         number: L45
-    yellow3:
+    chestMatrix31:
         number: L46
-    yellow4:
+    chestMatrix41:
         number: L47
-    yellow5Bottom:
+    chestMatrix51:
         number: L48
     shootAgain:
         number: L51
@@ -434,15 +434,15 @@ PRLamps:
         number: L52
     solarEnergyValue:
         number: L53
-    blue1Top:
+    chestMatrix12:
         number: L54
-    blue2:
+    chestMatrix22:
         number: L55
-    blue3:
+    chestMatrix32:
         number: L56
-    blue4:
+    chestMatrix42:
         number: L57
-    blue5Bottom:
+    chestMatrix52:
         number: L58
     dropTarget1Top:
         number: L61
@@ -450,15 +450,15 @@ PRLamps:
         number: L62
     dropTarget3Bottom:
         number: L63
-    amber1Top:
+    chestMatrix13:
         number: L64
-    amber2:
+    chestMatrix23:
         number: L65
-    amber3:
+    chestMatrix33:
         number: L66
-    amber4:
+    chestMatrix43:
         number: L67
-    amber5Bottom:
+    chestMatrix53:
         number: L68
     leftOutLaneExtraBall:
         number: L71
@@ -466,15 +466,15 @@ PRLamps:
         number: L72
     specialLamp:
         number: L73
-    green1Top:
+    chestMatrix14:
         number: L74
-    green2:
+    chestMatrix24:
         number: L75
-    green3:
+    chestMatrix34:
         number: L76
-    green4:
+    chestMatrix44:
         number: L77
-    green5Bottom:
+    chestMatrix54:
         number: L78
     rightOutLaneExtraBall:
         number: L81
@@ -482,13 +482,13 @@ PRLamps:
         number: L82
     notUsedLamp83:
         number: L83
-    red1Top:
+    chestMatrix15:
         number: L84
-    red2:
+    chestMatrix25:
         number: L85
-    red3:
+    chestMatrix35:
         number: L86
-    red4:
+    chestMatrix45:
         number: L87
-    red5Bottom:
+    chestMatrix55:
         number: L88

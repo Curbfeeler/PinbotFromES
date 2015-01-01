@@ -1,1 +1,1 @@
-python switchMatrixClient.py -y config/pinbot.yaml -p 9000
+python switchMatrixClient.py -y config/pinbot.yaml -p 9000 -i PinBotPf.jpg -l pinbot.layout

@@ -1,0 +1,209 @@
+bg_image: playfield.jpg
+button_locations:
+- vortex100k:
+    x: 373
+    y: 113
+- chestMatrix20:
+    x: 135
+    y: 347
+- chestMatrix04:
+    x: 250
+    y: 284
+- coinRight:
+    x: 75
+    y: 0
+- up:
+    x: 305
+    y: 2
+- chestMatrix30:
+    x: 134
+    y: 378
+- chestMatrix03:
+    x: 219
+    y: 286
+- playfieldTilt:
+    x: 39
+    y: 904
+- chestMatrix40:
+    x: 133
+    y: 405
+- trough2:
+    x: 402
+    y: 917
+- trough3:
+    x: 376
+    y: 925
+- trough1:
+    x: 427
+    y: 901
+- coinLeft:
+    x: 125
+    y: 0
+- chestMatrix50:
+    x: 132
+    y: 431
+- scoreEnergyStandUp:
+    x: 55
+    y: 125
+- tenPointer2_BehindDropBank:
+    x: 17
+    y: 450
+- unused81:
+    x: 8
+    y: 5
+- vortex5k:
+    x: 368
+    y: 188
+- lowerDrop:
+    x: 44
+    y: 498
+- rampIsDown:
+    x: 98
+    y: 363
+- exitSys11:
+    x: 200
+    y: 0
+- unused62:
+    x: 363
+    y: 4
+- unused63:
+    x: 391
+    y: 2
+- downSys11:
+    x: 224
+    y: 0
+- tilt:
+    x: 11
+    y: 901
+- inlaneLeft:
+    x: 57
+    y: 737
+- rightEyeball:
+    x: 275
+    y: 84
+- diagLED:
+    x: 336
+    y: 1
+- outlaneLeft:
+    x: 19
+    y: 741
+- NA1:
+    x: 149
+    y: 1
+- exit:
+    x: 38
+    y: 2
+- visorClosed:
+    x: 224
+    y: 40
+- jetBottom:
+    x: 412
+    y: 425
+- inlaneRight:
+    x: 380
+    y: 736
+- upperDrop:
+    x: 51
+    y: 431
+- midDrop:
+    x: 49
+    y: 463
+- slingL:
+    x: 87
+    y: 739
+- enterRamp:
+    x: 113
+    y: 69
+- rollTilt:
+    x: 30
+    y: 923
+- visorOpen:
+    x: 203
+    y: 40
+- singleEject:
+    x: 57
+    y: 44
+- trough4:
+    x: 351
+    y: 934
+- highScoreReset:
+    x: 175
+    y: 0
+- advancePlanent:
+    x: 428
+    y: 557
+- vortex20k:
+    x: 381
+    y: 85
+- slamTilt:
+    x: 54
+    y: 932
+- slingR:
+    x: 342
+    y: 744
+- leftEyeball:
+    x: 168
+    y: 81
+- jetMiddle:
+    x: 344
+    y: 343
+- upSys11:
+    x: 275
+    y: 1
+- outlaneRight:
+    x: 415
+    y: 734
+- tenPointer3:
+    x: 401
+    y: 532
+- tenPointer1:
+    x: 70
+    y: 257
+- flipperLwR:
+    x: 481
+    y: 807
+- chestMatrix05:
+    x: 277
+    y: 284
+- shooter:
+    x: 459
+    y: 914
+- jetTop:
+    x: 412
+    y: 258
+- chestMatrix02:
+    x: 190
+    y: 283
+- chestMatrix01:
+    x: 160
+    y: 285
+- enterSys11:
+    x: 249
+    y: 1
+- exitRamp:
+    x: 445
+    y: 32
+- startButton:
+    x: 127
+    y: 937
+- chestMatrix10:
+    x: 135
+    y: 317
+- enter:
+    x: 474
+    y: 0
+- debug:
+    x: 451
+    y: -2
+- flipperLwL:
+    x: 0
+    y: 791
+- coinCenter:
+    x: 100
+    y: 0
+- outhole:
+    x: 217
+    y: 938
+window_size:
+  height: 982
+  width: 504

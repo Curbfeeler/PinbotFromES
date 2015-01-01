@@ -1,7 +1,3 @@
-NOTE TO THE READER FROM CURBFEELER:
-This text file is what I'm using in my VPT file to get flipping against my P-ROC code.  Many thanks to MOcean for getting me going with this process.  Including this for others to use as a reference.... 
-
-
  '********Pinbot Williams(1986)
    '******** by unclewilly
    '********
@@ -63,7 +59,7 @@ This text file is what I'm using in my VPT file to get flipping against my P-ROC
  
      'Table Init
        Sub pinbot_Init
-		FlippersEnabled = False
+		FlippersEnabled = True
 		ACRelayState = False 
 		With Controller
 		   .GameName = cGameName
@@ -91,8 +87,8 @@ This text file is what I'm using in my VPT file to get flipping against my P-ROC
       '**Trough
            Set bsTrough = New cvpmBallStack
            With bsTrough
-			.InitSw 16,17,18,0,0,0,0,0
-			'.InitKick BallRelease, 160, 8
+			.InitSw 16,17,18,63,62,0,0,0
+			.InitKick BallRelease, 160, 8
 			.InitExitSnd "ballrelease", "Solenoid"
 			.BallImage = "ballDark"
 			.Balls = 4
@@ -246,14 +242,13 @@ End Sub
 		SolCallback(15) = "SetLamp 102," 'Flasher left inside top
 		SolCallback(16) = "SetLamp 103," 'Flasher Right Top 
 		SolCallback(18) = "SetLamp 104," 'LeftEye Flash
-		SolCallback(23) = "vpmNudge.SolGameOn"
+		'SolCallback(23) = "vpmNudge.SolGameOn"
 		SolCallback(25) = "vpmSolSound ""Knocker"","
 		SolCallback(26) = "SetLamp 105," 'Flasher left Top 
 		SolCallback(29) = "SetLamp 106," 'Flasher left middle 
 		SolCallback(30) = "SetLamp 107," 'Bumper Flasher
 		SolCallback(31) = "SetLamp 108," 'Flasher left lower right lower
 		SolCallback(32) = "SetLamp 109," 'sun flasher
-		
 		SolCallback(sFlipperRelay)      = "FlipperToggle "
 
    'Flipper Subs

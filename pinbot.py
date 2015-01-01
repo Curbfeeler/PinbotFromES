@@ -241,60 +241,37 @@ class PinbotFromES(game.BasicGame):
 		self.sound.register_music('game_over3', game_music_path + 'TheDroids_TheForcePartsIandII.mp3')
 
 		# Sound FX Registration
-		self.sound.register_sound('spinner', game_sound_path + '1.wav')
-		self.sound.register_sound('super_spinner', game_sound_path + '1.wav')
-		self.sound.register_sound('super_spinner_lit', game_sound_path + '1.wav')
-		self.sound.register_sound('sling', game_sound_path + '1.wav')
-		self.sound.register_sound('jet', game_sound_path + '1.wav')
-		self.sound.register_sound('jet_super', game_sound_path + '1.wav')
-		self.sound.register_sound('skillshotAwarded', game_sound_path + '1.wav')
-		self.sound.register_sound('centerRampEnter', game_sound_path + '1.wav')
-		self.sound.register_sound('centerRampComplete', game_sound_path + '1.wav')
-		self.sound.register_sound('rightRampComplete', game_sound_path + 'sweep1.wav',new_sound_volume=.1) #Very loud sample
-		# Tilt Sounds #
-		self.sound.register_sound('tilt_fx', game_sound_path + '1.wav')
-		self.sound.register_sound('tilt_vox', game_sound_path + '1.wav')
-		self.sound.register_sound('tilt_vox', game_sound_path + '1.wav')
-		self.sound.register_sound('tilt_vox', game_sound_path + '1.wav')
-		self.sound.register_sound('warning_vox', game_sound_path + '1.wav')
-		self.sound.register_sound('warning_vox', game_sound_path + '1.wav')
-		self.sound.register_sound('warning_vox', game_sound_path + '1.wav')
+		self.sound.register_sound('wakeUp', game_sound_path + 'Rooster.wav')
+		self.sound.register_sound('sling', game_sound_path + 'slings.wav')
+		self.sound.register_sound('jet', game_sound_path + 'pops.wav')
+		self.sound.register_sound('skillshotAwarded', game_sound_path + 'News_Intro.wav')
+		self.sound.register_sound('skillshotMissed', game_sound_path + 'Crickets.wav') #Crowd_Boo.wav
+		self.sound.register_sound('vortexMade', game_sound_path + 'Ahhh_Pleasantly_Surprised.wav')
+		#self.sound.register_sound('rightRampComplete', game_sound_path + 'sweep1.wav',new_sound_volume=.1) #Very loud sample
 		# BallSaver Sounds #
-		self.sound.register_sound('ball_saved', game_sound_path + '1.wav')
-		self.sound.register_sound('ball_saved', game_sound_path + '1.wav')
-		# Bonus Sounds #
-		self.sound.register_sound('bonus_features', game_sound_path + '1.wav')
-		self.sound.register_sound('bonus_total', game_sound_path + '1.wav')
-		self.sound.register_sound('bonus_music', game_music_path + 'music_001_bonus.wav',new_sound_volume=.5)
-		# Zone Sounds #
-		self.sound.register_sound('zone_na', game_sound_path + '1.wav')
-		#self.sound.register_sound('zone_awarded', game_sound_path + 'zone_awarded.wav')
-		self.sound.register_sound('zone_awarded', game_sound_path + 'earthquake1.wav')#,new_sound_volume=.8)
+		self.sound.register_sound('ball_saved', game_sound_path + 'ballsave.wav')
 		# Drop Sounds #
-		self.sound.register_sound('drop', game_sound_path + '1.wav')
+		self.sound.register_sound('drop', game_sound_path + 'dropsdown.wav')
 		# Eject Sounds #
 		self.sound.register_sound('eject', game_sound_path + '1.wav')
 		self.sound.register_sound('ejectsaucer', game_sound_path + '1.wav')
 		# Outlane Sounds #
-		self.sound.register_sound('outlane', game_sound_path + '1.wav')
+		self.sound.register_sound('outlane', game_sound_path + 'outlane_bad.wav')
 		self.sound.register_sound('inlane', game_sound_path + '1.wav')
 		# Game Start Voice #
 		self.sound.register_sound('game_start', game_sound_path + '1.wav')
-		self.sound.register_sound('game_start', game_sound_path + '1.wav')
-		self.sound.register_sound('game_start', game_sound_path + '1.wav')
-		self.sound.register_sound('game_start', game_sound_path + '1.wav')
-		# Game Start Car Sounds #
+		# Ten Point Switch #
 		self.sound.register_sound('game_start_rev', game_sound_path + '1.wav')
-		self.sound.register_sound('game_start_takeoff', game_sound_path + '1.wav')
+		self.sound.register_sound('game_start_takeoff', game_sound_path + 'Bottle_Rocket.wav')
 		# Player Voice #
-		self.sound.register_sound('player_1_vox', game_sound_path + '1.wav')
-		self.sound.register_sound('player_2_vox', game_sound_path + '1.wav')
-		self.sound.register_sound('player_3_vox', game_sound_path + '1.wav')
-		self.sound.register_sound('player_4_vox', game_sound_path + '1.wav')
-		self.sound.register_sound('player_1_up_vox', game_sound_path + '1.wav')
-		self.sound.register_sound('player_2_up_vox', game_sound_path + '1.wav')
-		self.sound.register_sound('player_3_up_vox', game_sound_path + '1.wav')
-		self.sound.register_sound('player_4_up_vox', game_sound_path + '1.wav')
+		self.sound.register_sound('player_1_vox', game_sound_path + 'welcomeplayer1vox.wav')
+		self.sound.register_sound('player_2_vox', game_sound_path + 'welcomeplayer2vox.wav')
+		self.sound.register_sound('player_3_vox', game_sound_path + 'welcomeplayer3vox.wav')
+		self.sound.register_sound('player_4_vox', game_sound_path + 'welcomeplayer4vox.wav')
+		self.sound.register_sound('player_1_up_vox', game_sound_path + 'player1vox.wav')
+		self.sound.register_sound('player_2_up_vox', game_sound_path + 'player2vox.wav')
+		self.sound.register_sound('player_3_up_vox', game_sound_path + 'player3vox.wav')
+		self.sound.register_sound('player_4_up_vox', game_sound_path + 'player4vox.wav')
 		# Multiball Sounds #
 		self.sound.register_sound('earthquake_1', game_sound_path + '1.wav')
 		self.sound.register_sound('main_loop_tape_stop', game_sound_path + 'music_001_main_loop_stop.wav',new_sound_volume=.5)
@@ -305,26 +282,11 @@ class PinbotFromES(game.BasicGame):
 		self.sound.register_sound('ball_lock_2', game_sound_path + '1.wav')
 		# Jackpot Vocals #
 		self.sound.register_sound('jackpot', game_sound_path + '1.wav')
-		self.sound.register_sound('jackpot', game_sound_path + '1.wav')
-		self.sound.register_sound('jackpot', game_sound_path + '1.wav')
 		self.sound.register_sound('jackpot_increase', game_sound_path + '1.wav')
 		self.sound.register_sound('jackpot_lit', game_sound_path + '1.wav')
 		# Complete Shot Vocals #
 		self.sound.register_sound('complete_shot', game_sound_path + '1.wav')
-		self.sound.register_sound('complete_shot', game_sound_path + '1.wav')
-		#self.sound.register_sound('complete_shot', game_sound_path + 'vocal_lionman.wav')
-		self.sound.register_sound('complete_shot', game_sound_path + '1.wav')
-		self.sound.register_sound('complete_shot', game_sound_path + '1.wav')
-		self.sound.register_sound('complete_shot', game_sound_path + '1.wav')
-		self.sound.register_sound('complete_shot', game_sound_path + '1.wav')
-		self.sound.register_sound('complete_shot', game_sound_path + '1.wav')
-		# Shelter Sounds #
-		self.sound.register_sound('mode_select', game_sound_path + '1.wav')
-		self.sound.register_sound('mode_selected', game_sound_path + '1.wav')
-		# Shelter Sounds #
-		self.sound.register_sound('captive_carnival', game_sound_path + '1.wav')
-		# Skillshot Sounds #
-		self.sound.register_sound('shoot_captive_ball', game_sound_path + '1.wav')
+
 
 		self.sound.set_volume(10)
 

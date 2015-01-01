@@ -26,40 +26,44 @@ lamp:mars                                  |
 lamp:earth                                  | 
 lamp:venus                          | 
 lamp:mercury                           | 
-lamp:yellow1Top                            | 
-lamp:yellow2                               | 
-lamp:yellow3                         | 
-lamp:yellow4                               | 
-lamp:yellow5Bottom                                 | 
 lamp:shootAgain                                     | 
 lamp:scoreEnergy                                     | 
 lamp:solarEnergyValue                                     | 
-lamp:blue1Top                                     | 
-lamp:blue2                                     | 
-lamp:yellow5Bottom                                    | 
 lamp:scoreEnergy                                    | 
 lamp:solarEnergyValue                                    | 
 lamp:dropTarget1Top                                 | 
 lamp:dropTarget2Middle                                | 
 lamp:dropTarget3Bottom                               | 
-lamp:amber1Top                           | 
-lamp:amber2                              | 
-lamp:amber3                            | 
-lamp:amber4                              | 
-lamp:amber5Bottom                           | 
 lamp:leftOutLaneExtraBall                               | 
 lamp:leftInLaneExtraBall                               | 
 lamp:specialLamp                                  | 
-lamp:green1Top                                  | 
-lamp:green2                             | 
-lamp:green3                          | 
-lamp:green4                               | 
-lamp:green5Bottom                            | 
 lamp:rightOutLaneExtraBall                              | 
 lamp:rightInLaneExtraBall                                   | 
 lamp:notUsedLamp83                                   | 
-lamp:red1Top                                   | 
-lamp:red2                                   | 
-lamp:red3                                   | 
-lamp:red4                                   | 
-lamp:red5Bottom                                   | 
+
+
+lamp:chestMatrix55           | .                               
+lamp:chestMatrix54           | .                               
+lamp:chestMatrix53           | .                               
+lamp:chestMatrix52           | .                               
+lamp:chestMatrix51           | .                               
+lamp:chestMatrix45          | ....                            
+lamp:chestMatrix44     | ....                            
+lamp:chestMatrix43  | ...                             
+lamp:chestMatrix42       | ...                             
+lamp:chestMatrix41    | ....                            
+lamp:chestMatrix35   | ....                            
+lamp:chestMatrix34      | ....                            
+lamp:chestMatrix33    | ....                            
+lamp:chestMatrix32      | ....                            
+lamp:chestMatrix31   | ....                            
+lamp:chestMatrix25   | ....                            
+lamp:chestMatrix24      | ....                            
+lamp:chestMatrix23    | ....                            
+lamp:chestMatrix22      | ....                            
+lamp:chestMatrix21   | ....                            
+lamp:chestMatrix15   | ....                            
+lamp:chestMatrix14      | ....                            
+lamp:chestMatrix13    | ....                            
+lamp:chestMatrix12      | ....                            
+lamp:chestMatrix11   | ....                            
