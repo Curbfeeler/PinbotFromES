@@ -135,6 +135,9 @@ Highscore:
     increments: 50000000
     default: 200000000
 Feature:
+  'Chest Hold':
+    options: [true,false]
+    default: false
   'Jackpot Hold':
     options: [true,false]
     default: false

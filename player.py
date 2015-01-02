@@ -24,6 +24,7 @@
 #################################################################################
 
 import procgame.game
+import numpy as np
 
 class Player(procgame.game.Player):
 
@@ -46,6 +47,121 @@ class Player(procgame.game.Player):
 			self.player_stats['status']=''
 			self.player_stats['bonus_x']=1
 
+			#Switch Denotation
+			#chestMatrix01 #Row 0, Col 1, Yellow Switch - Hori
+			#chestMatrix02 #Row 0, Col 2, Blue Switch - Hori
+			#chestMatrix03 #Row 0, Col 3, Orange Switch - Hori
+			#chestMatrix04 #Row 0, Col 4, Green Switch - Hori
+			#chestMatrix05 #Row 0, Col 5, Red Switch - Hori
+			#chestMatrix10 #Row 1, Col 0, Yellow Switch - Vert
+			#chestMatrix20 #Row 2, Col 0, Yellow Switch - Vert
+			#chestMatrix30 #Row 3, Col 0, Yellow Switch - Vert
+			#chestMatrix40 #Row 4, Col 0, Yellow Switch - Vert
+			#chestMatrix50 #Row 5, Col 0, Yellow Switch - Vert
+			#	Name	        row	col	in code
+			#	chestMatrix	1	1	chestMatrix11
+			#	chestMatrix	1	2	chestMatrix12
+			#	chestMatrix	1	3	chestMatrix13
+			#	chestMatrix	1	4	chestMatrix14
+			#	chestMatrix	1	5	chestMatrix15
+			#	chestMatrix	2	1	chestMatrix21
+			#	chestMatrix	2	2	chestMatrix22
+			#	chestMatrix	2	3	chestMatrix23
+			#	chestMatrix	2	4	chestMatrix24
+			#	chestMatrix	2	5	chestMatrix25
+			#	chestMatrix	3	1	chestMatrix31
+			#	chestMatrix	3	2	chestMatrix32
+			#	chestMatrix	3	3	chestMatrix33
+			#	chestMatrix	3	4	chestMatrix34
+			#	chestMatrix	3	5	chestMatrix35
+			#	chestMatrix	4	1	chestMatrix41
+			#	chestMatrix	4	2	chestMatrix42
+			#	chestMatrix	4	3	chestMatrix43
+			#	chestMatrix	4	4	chestMatrix44
+			#	chestMatrix	4	5	chestMatrix45
+			#	chestMatrix	5	1	chestMatrix51
+			#	chestMatrix	5	2	chestMatrix52
+			#	chestMatrix	5	3	chestMatrix53
+			#	chestMatrix	5	4	chestMatrix54
+			#	chestMatrix	5	5	chestMatrix55
+
+
+			### Chest Matrix Stats ####################################
+			self.chestMatrix01={} #YellowRow
+			self.chestMatrix01['chestMatrix11']=False
+			self.chestMatrix01['chestMatrix12']=False
+			self.chestMatrix01['chestMatrix13']=False
+			self.chestMatrix01['chestMatrix14']=False
+			self.chestMatrix01['chestMatrix15']=False
+			self.chestMatrix02={} #BlueRow
+			self.chestMatrix02['chestMatrix21']=False
+			self.chestMatrix02['chestMatrix22']=False
+			self.chestMatrix02['chestMatrix23']=False
+			self.chestMatrix02['chestMatrix24']=False
+			self.chestMatrix02['chestMatrix25']=False
+			self.chestMatrix03={} #OrangeRow
+			self.chestMatrix03['chestMatrix31']=False
+			self.chestMatrix03['chestMatrix32']=False
+			self.chestMatrix03['chestMatrix33']=False
+			self.chestMatrix03['chestMatrix34']=False
+			self.chestMatrix03['chestMatrix35']=False
+			self.chestMatrix04={} #GreenRow
+			self.chestMatrix04['chestMatrix41']=False
+			self.chestMatrix04['chestMatrix42']=False
+			self.chestMatrix04['chestMatrix43']=False
+			self.chestMatrix04['chestMatrix44']=False
+			self.chestMatrix04['chestMatrix45']=False
+			self.chestMatrix05={} #RedRow
+			self.chestMatrix05['chestMatrix51']=False
+			self.chestMatrix05['chestMatrix52']=False
+			self.chestMatrix05['chestMatrix53']=False
+			self.chestMatrix05['chestMatrix54']=False
+			self.chestMatrix05['chestMatrix55']=False
+
+			self.chestMatrix10={} #YellowCol
+			self.chestMatrix10['chestMatrix11']=False
+			self.chestMatrix10['chestMatrix21']=False
+			self.chestMatrix10['chestMatrix31']=False
+			self.chestMatrix10['chestMatrix41']=False
+			self.chestMatrix10['chestMatrix51']=False
+			self.chestMatrix20={} #BlueCol  
+			self.chestMatrix20['chestMatrix12']=False
+			self.chestMatrix20['chestMatrix22']=False
+			self.chestMatrix20['chestMatrix32']=False
+			self.chestMatrix20['chestMatrix42']=False
+			self.chestMatrix20['chestMatrix52']=False
+			self.chestMatrix30={} #OrangeCol
+			self.chestMatrix30['chestMatrix13']=False
+			self.chestMatrix30['chestMatrix23']=False
+			self.chestMatrix30['chestMatrix33']=False
+			self.chestMatrix30['chestMatrix43']=False
+			self.chestMatrix30['chestMatrix53']=False
+			self.chestMatrix40={} #GreenCol 
+			self.chestMatrix40['chestMatrix14']=False
+			self.chestMatrix40['chestMatrix24']=False
+			self.chestMatrix40['chestMatrix34']=False
+			self.chestMatrix40['chestMatrix44']=False
+			self.chestMatrix40['chestMatrix54']=False
+			self.chestMatrix50={} #RedCol   
+			self.chestMatrix50['chestMatrix15']=False
+			self.chestMatrix50['chestMatrix25']=False
+			self.chestMatrix50['chestMatrix35']=False
+			self.chestMatrix50['chestMatrix45']=False
+			self.chestMatrix50['chestMatrix55']=False
+
+			self.chestRowMatrix = {}
+			self.chestRowMatrix[0]=self.chestMatrix01
+			self.chestRowMatrix[1]=self.chestMatrix02
+			self.chestRowMatrix[2]=self.chestMatrix03
+			self.chestRowMatrix[3]=self.chestMatrix04
+			self.chestRowMatrix[4]=self.chestMatrix05
+
+			self.chestColMatrix = {}
+			self.chestColMatrix[0]=self.chestMatrix10
+			self.chestColMatrix[1]=self.chestMatrix20
+			self.chestColMatrix[2]=self.chestMatrix30
+			self.chestColMatrix[3]=self.chestMatrix40
+			self.chestColMatrix[4]=self.chestMatrix50
 
 			### Drop Target Stats ####################################
 			self.player_stats['drop_banks_completed']=0

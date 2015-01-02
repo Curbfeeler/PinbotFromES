@@ -94,6 +94,8 @@ class BallSaver(game.Mode):
 
 		#Stop Skillshot
 		self.game.modes.remove(self.game.skillshot_mode)
+		#Start Chest Mode
+		self.game.modes.add(self.game.chest_mode)
 
 		self.game.sound.play('ball_saved')
 
@@ -108,6 +110,8 @@ class BallSaver(game.Mode):
 
 		#Stop Skillshot
 		self.game.modes.remove(self.game.skillshot_mode)
+		#Start Chest Mode
+		self.game.modes.add(self.game.chest_mode)
 
 		self.game.sound.play('ball_saved')
 
@@ -180,6 +184,47 @@ class BallSaver(game.Mode):
 		return procgame.game.SwitchContinue
 
 	def sw_slingR_active(self, sw):
+		if (self.game.utilities.get_player_stats('ballsave_timer_active') == False):
+			self.startBallSaverTimers()
+		return procgame.game.SwitchContinue
+	def sw_chestMatrix01_active(self, sw):
+		if (self.game.utilities.get_player_stats('ballsave_timer_active') == False):
+			self.startBallSaverTimers()
+		return procgame.game.SwitchContinue
+
+	def sw_chestMatrix02_active(self, sw):
+		if (self.game.utilities.get_player_stats('ballsave_timer_active') == False):
+			self.startBallSaverTimers()
+		return procgame.game.SwitchContinue
+	def sw_chestMatrix03_active(self, sw):
+		if (self.game.utilities.get_player_stats('ballsave_timer_active') == False):
+			self.startBallSaverTimers()
+		return procgame.game.SwitchContinue
+	def sw_chestMatrix04_active(self, sw):
+		if (self.game.utilities.get_player_stats('ballsave_timer_active') == False):
+			self.startBallSaverTimers()
+		return procgame.game.SwitchContinue
+	def sw_chestMatrix05_active(self, sw):
+		if (self.game.utilities.get_player_stats('ballsave_timer_active') == False):
+			self.startBallSaverTimers()
+		return procgame.game.SwitchContinue
+	def sw_chestMatrix10_active(self, sw):
+		if (self.game.utilities.get_player_stats('ballsave_timer_active') == False):
+			self.startBallSaverTimers()
+		return procgame.game.SwitchContinue
+	def sw_chestMatrix20_active(self, sw):
+		if (self.game.utilities.get_player_stats('ballsave_timer_active') == False):
+			self.startBallSaverTimers()
+		return procgame.game.SwitchContinue
+	def sw_chestMatrix30_active(self, sw):
+		if (self.game.utilities.get_player_stats('ballsave_timer_active') == False):
+			self.startBallSaverTimers()
+		return procgame.game.SwitchContinue
+	def sw_chestMatrix40_active(self, sw):
+		if (self.game.utilities.get_player_stats('ballsave_timer_active') == False):
+			self.startBallSaverTimers()
+		return procgame.game.SwitchContinue
+	def sw_chestMatrix50_active(self, sw):
 		if (self.game.utilities.get_player_stats('ballsave_timer_active') == False):
 			self.startBallSaverTimers()
 		return procgame.game.SwitchContinue

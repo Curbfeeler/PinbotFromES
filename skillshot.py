@@ -137,21 +137,23 @@ class SkillshotMode(game.Mode):
 			#self.game.utilities.log("self.ActiveSkillShotIndex: " + str(self.ActiveSkillShotIndex) +"- iMySeconds: " +str(iMySeconds) ,'info')
 	
 	def startSkillshotLamps(self):
-		#self.game.lamps.gameOverBackBox.schedule(schedule=0x0000000F, cycle_seconds=0, now=False)
+		pass
+	        #self.game.lamps.gameOverBackBox.schedule(schedule=0x0000000F, cycle_seconds=0, now=False)
 		#self.game.lamps.matchBackBox.schedule(schedule=0x000000F0, cycle_seconds=0, now=False)
 		#self.game.lamps.ballInPlayBackBox.schedule(schedule=0x00000F00, cycle_seconds=0, now=False)
 		#self.game.lamps.mouth1LeftBackBox.schedule(schedule=0x0000F000, cycle_seconds=0, now=False)
 		#self.game.lamps.mouth2BackBox.schedule(schedule=0x000F0000, cycle_seconds=0, now=False)
-		self.game.lamps.chestMatrix52.schedule(schedule=0xCCC00000, cycle_seconds=1, now=False)
+		#self.game.lamps.chestMatrix52.schedule(schedule=0xCCC00000, cycle_seconds=1, now=False)
 		#self.game.coils.outholeKicker_Knocker.schedule(schedule=0x00C00000, cycle_seconds=0, now=False)
 
 	def stopSkillshotLamps(self):
+		pass
 		#self.game.lamps.gameOverBackBox.disable()
 		#self.game.lamps.matchBackBox.disable()
 		#self.game.lamps.ballInPlayBackBox.disable()
 		#self.game.lamps.mouth1LeftBackBox.disable()
 		#self.game.lamps.mouth2BackBox.disable()
-		self.game.lamps.chestMatrix52.disable()
+		#self.game.lamps.chestMatrix52.disable()
 		#self.game.coils.outholeKicker_Knocker.disable()
 
 	##############################
@@ -163,6 +165,7 @@ class SkillshotMode(game.Mode):
 		self.game.sound.stop_music()
 		self.game.sound.play_music('main'+ str(self.game.ball),loops=1,music_volume=.5)				
 		self.game.modes.remove(self)
+		self.game.modes.add(self.game.chest_mode)
 
 	def sw_shooter_active_for_8000ms(self, sw):
 		#########################
@@ -183,14 +186,16 @@ class SkillshotMode(game.Mode):
 		self.game.sound.stop_music()
 		self.game.sound.play_music('main'+ str(self.game.ball),loops=1,music_volume=.5)				
 		self.game.modes.remove(self)
+		self.game.modes.add(self.game.chest_mode)
 
 	def skillshotMissed(self):
 		self.game.utilities.displayText(100,'SKILLSHOT','MISSED',seconds=self.skillshotDisplayTime,justify='center')
 		self.game.sound.play('skillshotMissed')
 		self.game.sound.stop_music()
-		self.game.sound.play_music('main'+ str(self.game.ball),loops=1,music_volume=.5)	
+		self.game.sound.play_music('main'+ str(self.game.ball),loops=1,music_volume=.5)
 		self.game.modes.remove(self)
-
+		self.game.modes.add(self.game.chest_mode)
+		
 	def vortexMade(self, iPoints):
 		self.game.utilities.displayText(100,'VORTEX',locale.format("%d", iPoints * self.game.utilities.get_player_stats('skillshot_x'), grouping=True) + ' POINTS',seconds=self.skillshotDisplayTime,justify='center')
 		self.game.utilities.score(iPoints)# * self.game.utilities.get_player_stats('skillshot_x'))
@@ -201,6 +206,8 @@ class SkillshotMode(game.Mode):
 		self.game.sound.stop_music()
 		self.game.sound.play_music('main'+ str(self.game.ball),loops=1,music_volume=.5)				
 		self.game.modes.remove(self)
+		self.game.modes.add(self.game.chest_mode)		
+		
 
 	###########################
 	## Switch Handling Modes ##

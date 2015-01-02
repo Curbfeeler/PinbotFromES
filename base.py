@@ -230,6 +230,8 @@ class BaseGameMode(game.Mode):
 
 	def unloadBallModes(self):
 		self.game.modes.remove(self.game.skillshot_mode)
+		self.game.modes.remove(self.game.chest_mode)
+
 		#self.game.modes.remove(self.game.centerramp_mode)
 		#self.game.modes.remove(self.game.rightramp_mode)
 		self.game.modes.remove(self.game.tilt)
@@ -325,33 +327,38 @@ class BaseGameMode(game.Mode):
 
 	def sw_singleEject_closed_for_200ms(self, sw):
 		self.ejectSingle1()
+		self.game.utilities.setBallInPlay(True)
 		return procgame.game.SwitchStop
 
 	def sw_jetMiddle_active(self, sw):
 		self.game.sound.play('jet')
 		self.game.utilities.score(500)
+		self.game.utilities.setBallInPlay(True)
 		return procgame.game.SwitchStop
 
 	def sw_jetBottom_active(self, sw):
 		self.game.sound.play('jet')
 		self.game.utilities.score(500)
+		self.game.utilities.setBallInPlay(True)
 		return procgame.game.SwitchStop
 
 	def sw_jetTop_active(self, sw):
 		self.game.sound.play('jet')
 		self.game.utilities.score(500)
+		self.game.utilities.setBallInPlay(True)
 		return procgame.game.SwitchStop
 
 	def sw_slingL_active(self, sw):
 		self.game.sound.play('sling')
 		self.game.utilities.score(100)
+		self.game.utilities.setBallInPlay(True)
 		return procgame.game.SwitchStop
 
 	def sw_slingR_active(self, sw):
 		self.game.sound.play('sling')
 		self.game.utilities.score(100)
+		self.game.utilities.setBallInPlay(True)
 		return procgame.game.SwitchStop
-
 
 
 	##################################################
@@ -429,16 +436,24 @@ class BaseGameMode(game.Mode):
 	## Outlane Switches
 	#############################
 	def sw_outlaneRight_closed(self, sw):
+		self.game.utilities.setBallInPlay(True)
+		self.game.utilities.score(100)
 		self.game.sound.play('outlane')
 
 	def sw_outlaneLeft_closed(self, sw):
+		self.game.utilities.setBallInPlay(True)
+		self.game.utilities.score(100)
 		self.game.sound.play('outlane')
 
 	#############################
 	## Inlane Switches
 	#############################
 	def sw_inlaneRight_closed(self, sw):
+		self.game.utilities.setBallInPlay(True)
+		self.game.utilities.score(100)
 		self.game.sound.play('inlane')
 
 	def sw_inlaneLeft_closed(self, sw):
+		self.game.utilities.setBallInPlay(True)
+		self.game.utilities.score(100)
 		self.game.sound.play('inlane')
