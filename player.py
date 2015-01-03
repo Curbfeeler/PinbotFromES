@@ -148,20 +148,21 @@ class Player(procgame.game.Player):
 			self.chestMatrix50['chestMatrix35']=False
 			self.chestMatrix50['chestMatrix45']=False
 			self.chestMatrix50['chestMatrix55']=False
+			
+			self.chestRowMatrix = []
+			self.chestRowMatrix.append(self.chestMatrix01)
+			self.chestRowMatrix.append(self.chestMatrix02)
+			self.chestRowMatrix.append(self.chestMatrix03)
+			self.chestRowMatrix.append(self.chestMatrix04)
+			self.chestRowMatrix.append(self.chestMatrix05)
 
-			self.chestRowMatrix = {}
-			self.chestRowMatrix[0]=self.chestMatrix01
-			self.chestRowMatrix[1]=self.chestMatrix02
-			self.chestRowMatrix[2]=self.chestMatrix03
-			self.chestRowMatrix[3]=self.chestMatrix04
-			self.chestRowMatrix[4]=self.chestMatrix05
+			self.chestColMatrix = []
+			self.chestColMatrix.append(self.chestMatrix10)
+			self.chestColMatrix.append(self.chestMatrix20)
+			self.chestColMatrix.append(self.chestMatrix30)
+			self.chestColMatrix.append(self.chestMatrix40)
+			self.chestColMatrix.append(self.chestMatrix50)
 
-			self.chestColMatrix = {}
-			self.chestColMatrix[0]=self.chestMatrix10
-			self.chestColMatrix[1]=self.chestMatrix20
-			self.chestColMatrix[2]=self.chestMatrix30
-			self.chestColMatrix[3]=self.chestMatrix40
-			self.chestColMatrix[4]=self.chestMatrix50
 
 			### Drop Target Stats ####################################
 			self.player_stats['drop_banks_completed']=0

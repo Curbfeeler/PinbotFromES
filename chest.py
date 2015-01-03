@@ -64,15 +64,70 @@ class Chest(game.Mode):
 			return procgame.game.SwitchContinue
 
 	def chestMatrixSwitches(self,sw):
+		bOneRowKnownComplete = False
+		bOneColKnownComplete = False
+		objPlayer = self.game.players[self.game.current_player_index]
 		self.game.score(100)
-		#self.game.bonus(1)
-		#self.game.lamps[sw.name].enable()
-		#self.game.effects.flickerOn(sw.name)   # switch on the lamp at the target
-		self.game.lamps.chestMatrix11.enable()
-		#self.game.current_player().chestRowMatrix[sw.name]=True
-		if sum([i for i in self.game.current_player().chestRowMatrix.values()])==5:
-			pass
-		#self.game.lamps.notUsed11.enable()
+		iRowHit = int(sw.name[11])
+		iColHit = int(sw.name[12])
+		if(iRowHit > 0): #hit a row
+			datadict = objPlayer.chestRowMatrix[iRowHit-1]
+			iSumDataDict = sum(datadict.values())
+			if iSumDataDict==5: #Already all complete!
+				self.game.utilities.displayText(100,'TRY DIFF','ROW PLEASE',seconds=1,justify='center')
+				pass
+			elif iSumDataDict==0: #No rows complete, no reason to "for loop" here 
+				self.game.lamps["chestMatrix" +str(iRowHit) +str(iColHit+1)].enable()
+				datadict["chestMatrix" +str(iRowHit) +str(iColHit+1)] = True
+				otherdatadict = objPlayer.chestColMatrix[iColHit]
+				otherdatadict["chestMatrix" +str(iRowHit) +str(iColHit+1)] = True
+			else:
+				for keyA, valueA in sorted(datadict.items()):
+					if valueA == False:
+						self.game.lamps[keyA].enable() #Light same-named lamp
+						datadict[keyA] = True
+						otherdatadict = objPlayer.chestColMatrix[int(keyA[12])-1]
+						for keyB, valueB in sorted(otherdatadict.items()):						
+							if keyB == keyA:
+								otherdatadict[keyB] = True
+								break
+						if iSumDataDict == 4:
+							bOneRowKnownComplete = True
+							self.game.utilities.displayText(100,'ROW ' +str(iRowHit),'MADE',seconds=1,justify='center')
+						break
+			#Now check to see if the entire matrix is made			
+			if bOneRowKnownComplete and sum(objPlayer.chestRowMatrix[4].values())==5 and sum(objPlayer.chestRowMatrix[3].values())==5 and sum(objPlayer.chestRowMatrix[2].values())==5 and sum(objPlayer.chestRowMatrix[1].values())==5 and sum(objPlayer.chestRowMatrix[0].values())==5:
+				self.game.utilities.displayText(100,'GOOD JOB','ALL DONE',seconds=1,justify='center')
+				pass
+		else:            #hit a col
+			datadict = objPlayer.chestColMatrix[iColHit-1]
+			iSumDataDict = sum(datadict.values())
+			if iSumDataDict==5: #Already all complete!
+				self.game.utilities.displayText(100,'TRY DIFF','COL PLEASE',seconds=1,justify='center')
+				pass
+			elif iSumDataDict==0: #No Cols complete, no reason to "for loop" here 
+				self.game.lamps["chestMatrix" +str(iRowHit+1) +str(iColHit)].enable()
+				datadict["chestMatrix" +str(iRowHit+1) +str(iColHit)] = True
+				otherdatadict = objPlayer.chestRowMatrix[iRowHit]
+				otherdatadict["chestMatrix" +str(iColHit) +str(iRowHit+1)] = True
+			else:
+				for keyA, valueA in sorted(datadict.items()):
+					if valueA == False:
+						self.game.lamps[keyA].enable() #Light same-named lamp
+						datadict[keyA] = True
+						otherdatadict = objPlayer.chestRowMatrix[int(keyA[12])-1]
+						for keyB, valueB in sorted(otherdatadict.items()):						
+							if keyB == keyA:
+								otherdatadict[keyB] = True
+								break
+							if iSumDataDict == 4:
+								bOneColKnownComplete = True
+								self.game.utilities.displayText(100,'COL ' +str(iColHit),'MADE',seconds=1,justify='center')
+						break
+			#Now check to see if the entire matrix is made			
+			if bOneColKnownComplete and sum(objPlayer.chestColMatrix[4].values())==5 and sum(objPlayer.chestColMatrix[3].values())==5 and sum(objPlayer.chestColMatrix[2].values())==5 and sum(objPlayer.chestColMatrix[1].values())==5 and sum(objPlayer.chestColMatrix[0].values())==5:
+				self.game.utilities.displayText(100,'GOOD JOB','ALL DONE',seconds=1,justify='center')
+				pass
 
 
 #Switch Denotation

@@ -95,7 +95,8 @@ class BallSaver(game.Mode):
 		#Stop Skillshot
 		self.game.modes.remove(self.game.skillshot_mode)
 		#Start Chest Mode
-		self.game.modes.add(self.game.chest_mode)
+		#self.game.modes.remove(self.game.chest_mode)
+		#self.game.modes.add(self.game.chest_mode)
 
 		self.game.sound.play('ball_saved')
 
@@ -111,7 +112,8 @@ class BallSaver(game.Mode):
 		#Stop Skillshot
 		self.game.modes.remove(self.game.skillshot_mode)
 		#Start Chest Mode
-		self.game.modes.add(self.game.chest_mode)
+		#self.game.modes.remove(self.game.chest_mode)
+		#self.game.modes.add(self.game.chest_mode)
 
 		self.game.sound.play('ball_saved')
 
