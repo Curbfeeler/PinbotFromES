@@ -429,7 +429,8 @@ class BaseGameMode(game.Mode):
 	def sw_shooter_closed_for_1s(self, sw):
 		if (self.game.utilities.get_player_stats('ball_in_play') == True):
 			#Kick the ball into play
-			self.game.utilities.launch_ball()
+			#self.game.trough.launch_ball()
+			pass
 		return procgame.game.SwitchStop
 
 	#############################

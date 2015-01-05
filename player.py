@@ -187,7 +187,7 @@ class Player(procgame.game.Player):
 			### Skillshot ############################################
 			self.player_stats['skillshot_active']=False
 			self.player_stats['skillshot_x']=1
-
+			self.player_stats['chestmade_x']=1
 			### Zone Status Stats ####################################
 			self.player_stats['active_zone_limit']=3
 			self.player_stats['zones_visited']=0

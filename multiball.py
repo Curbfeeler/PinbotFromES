@@ -1,4 +1,4 @@
-#################################################################################
+ #################################################################################
 ##____ ___ _   _ ____   ___ _____   ____    ___                      
 #|  _ \_ _| \ | | __ ) / _ \_   _| |___ \  / _ \                     
 #| |_) | ||  \| |  _ \| | | || |     __) || | | |                    
@@ -35,9 +35,9 @@ class Multiball(game.Mode):
 			self.ballsLocked = 0
 			self.ballLock1Lit = False
 			self.ballLock2Lit = False
-			self.ballLock3Lit = False
+			#self.ballLock3Lit = False
 			self.multiballStarting = False
-			self.multiballIntroLength = 11.287
+			#self.multiballIntroLength = 11.287
 
 	def mode_started(self):
 		self.getUserStats()
@@ -49,35 +49,36 @@ class Multiball(game.Mode):
 
 	def update_lamps(self):
 		print "Update Lamps: Multiball"
-		self.disableLockLamps()
-		if (self.ballLock1Lit == True):
-			self.game.lamps.dropHoleLock.schedule(schedule=0xFF00FF00, cycle_seconds=0, now=True)
-			self.game.lamps.rightRampLock.schedule(schedule=0x00FF00FF, cycle_seconds=0, now=True)
-			print "Lock 1 is Lit"
-		elif (self.ballLock2Lit == True):
-			self.game.lamps.dropHoleLock.schedule(schedule=0xFF00FF00, cycle_seconds=0, now=True)
-			self.game.lamps.rightRampLock.schedule(schedule=0x00FF00FF, cycle_seconds=0, now=True)
-			print "Lock 2 is Lit"
-		elif (self.ballLock3Lit == True):
-			self.game.lamps.dropHoleLock.schedule(schedule=0xFF00FF00, cycle_seconds=0, now=True)
-			self.game.lamps.rightRampLock.schedule(schedule=0x00FF00FF, cycle_seconds=0, now=True)
-			print "Lock 3 is Lit"
+		#self.disableLockLamps()
+		#if (self.ballLock1Lit == True):
+			#self.game.lamps.dropHoleLock.schedule(schedule=0xFF00FF00, cycle_seconds=0, now=True)
+			#self.game.lamps.rightRampLock.schedule(schedule=0x00FF00FF, cycle_seconds=0, now=True)
+			#print "Lock 1 is Lit"
+		#elif (self.ballLock2Lit == True):
+			#self.game.lamps.dropHoleLock.schedule(schedule=0xFF00FF00, cycle_seconds=0, now=True)
+			#self.game.lamps.rightRampLock.schedule(schedule=0x00FF00FF, cycle_seconds=0, now=True)
+			#print "Lock 2 is Lit"
+		#elif (self.ballLock3Lit == True):
+			#self.game.lamps.dropHoleLock.schedule(schedule=0xFF00FF00, cycle_seconds=0, now=True)
+			#self.game.lamps.rightRampLock.schedule(schedule=0x00FF00FF, cycle_seconds=0, now=True)
+			#print "Lock 3 is Lit"
 
-		
+	def open_visor(self):
+		self.game.coils.visorMotor.pulse(100)
 			
-	def disableLockLamps(self):
-		self.game.lamps.rightRampLock.disable()
-		self.game.lamps.ejectLock.disable()
-		self.game.lamps.dropHoleLock.disable()
+	#def disableLockLamps(self):
+		#self.game.lamps.rightRampLock.disable()
+		#self.game.lamps.ejectLock.disable()
+		#self.game.lamps.dropHoleLock.disable()
 
 	def getUserStats(self):
 		self.ballLock1Lit = self.game.utilities.get_player_stats('lock1_lit')
 		self.ballLock2Lit = self.game.utilities.get_player_stats('lock2_lit')
-		self.ballLock3Lit = self.game.utilities.get_player_stats('lock3_lit')
+		#self.ballLock3Lit = self.game.utilities.get_player_stats('lock3_lit')
 		self.ballsLocked = self.game.utilities.get_player_stats('balls_locked')
 		print "Lock 1: " + str(self.game.utilities.get_player_stats('lock1_lit'))
 		print "Lock 2: " + str(self.game.utilities.get_player_stats('lock2_lit'))
-		print "Lock 3: " + str(self.game.utilities.get_player_stats('lock3_lit'))
+		#print "Lock 3: " + str(self.game.utilities.get_player_stats('lock3_lit'))
 		print "Balls Locked: " + str(self.game.utilities.get_player_stats('balls_locked'))
 
 	def liteLock(self,callback):
@@ -148,7 +149,7 @@ class Multiball(game.Mode):
 		self.game.sound.play('centerRampComplete')
 		self.game.sound.play_music('multiball_loop'+ str(self.game.ball),loops=-1,music_volume=.6)
 		self.game.utilities.acCoilPulse(coilname='singleEjectHole_LeftInsertBDFlasher',pulsetime=50)
-		self.game.trough.launch_balls(num=2)
+		#self.game.trough.launch_balls(num=2)
 		self.multiballStarting = False
 		self.game.update_lamps()
 
@@ -186,11 +187,20 @@ class Multiball(game.Mode):
 		#else:
 			#return procgame.game.SwitchContinue
 
+
 	def sw_outhole_closed_for_500ms(self, sw):
 		#if (self.game.trough.num_balls_in_play == 2):
 			#Last ball - Need to stop multiball
 			#self.stopMultiball()
 		return procgame.game.SwitchContinue
 
+	def sw_visorClosed_open_for_100ms(self, sw):
+		self.open_visor()
+		return procgame.game.SwitchContinue
+
+	#visorOpen:
+	    #number: S67
+	#visorClosed:
+	    #number: S66
 
 

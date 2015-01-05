@@ -137,7 +137,7 @@ Highscore:
 Feature:
   'Chest Hold':
     options: [true,false]
-    default: false
+    default: true
   'Jackpot Hold':
     options: [true,false]
     default: false

@@ -47,15 +47,12 @@ class Tilt(game.Mode):
 	def disableAllBallModes(self):
 		#### Remove Ball Modes ####
 		self.game.modes.remove(self.game.skillshot_mode)
-		self.game.modes.remove(self.game.centerramp_mode)
-		self.game.modes.remove(self.game.rightramp_mode)
+		
 		self.game.modes.remove(self.game.ballsaver_mode)
 		self.game.modes.remove(self.game.drops_mode)
 		self.game.modes.remove(self.game.jackpot_mode)
-		self.game.modes.remove(self.game.spinner_mode)
 		self.game.modes.remove(self.game.multiball_mode)
-		self.game.modes.remove(self.game.collect_mode)
-		self.game.modes.remove(self.game.shelter_mode)
+		#self.game.modes.remove(self.game.collect_mode)
 		self.game.modes.remove(self.game.bonusmultiplier_mode)
 
 		### Clear Mini Modes ###

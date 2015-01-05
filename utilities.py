@@ -89,8 +89,9 @@ class UtilitiesMode(game.Mode):
 			#self.game.coils.autoLauncher.pulse(100) #Does not need AC Relay logic
 		##self.game.coils.quakeInstitute.enable()
 
-	#def launch_ball(self):
-		#if self.game.switches.ballShooter.is_active()==True:
+	def launch_ball(self):
+		if self.game.switches.ballShooter.is_active()==True:
+			pass
 			#self.game.coils.autoLauncher.pulse(100)
 
 	def setBallInPlay(self,ballInPlay=True):

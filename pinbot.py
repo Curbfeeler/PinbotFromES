@@ -99,7 +99,7 @@ class PinbotFromES(game.BasicGame):
 		self.load_config(game_machine_yaml)
 		self.logging_enabled = True
 		self.balls_per_game = ballsPerGame
-		OSC_closed_switches = ['trough1','trough2','trough3','trough4']
+		OSC_closed_switches = ['trough1','trough2','trough3','trough4','visorOpen']
 		
 		self.osc = modes.OSC_Mode(game=self, priority=1, closed_switches=OSC_closed_switches)
 		self.modes.add(self.osc)
@@ -230,11 +230,11 @@ class PinbotFromES(game.BasicGame):
 		self.sound.register_music('multiball_loop1', game_music_path + 'ELO_HereIsTheNews.mp3')
 		self.sound.register_music('game_over1', game_music_path + 'TheDroids_TheForcePartsIandII.mp3')
 
-		self.sound.register_music('main2', game_music_path + 'Transvolta_DiscoComputer.mp3')
-		self.sound.register_music('shooter2', game_music_path + 'DigitalEmotion_GoGoYellowScreen_90secondShooterLoop.wav')
-		self.sound.register_music('multiball_intro2', game_music_path + 'Automat_Droid.mp3')
+		self.sound.register_music('main2', game_music_path + 'Kraftwerk - Computer Love.mp3')
+		self.sound.register_music('shooter2', game_music_path + 'SPACE - Magic Fly (1977 Music Video).mp3')
+		self.sound.register_music('multiball_intro2', game_music_path + 'Ozric Tentacles - Eternal Wheel.mp3')
 		self.sound.register_music('multiball_loop2', game_music_path + 'ELO_HereIsTheNews.mp3')
-		self.sound.register_music('game_over2', game_music_path + 'TheDroids_TheForcePartsIandII.mp3')
+		self.sound.register_music('game_over2', game_music_path + 'Didier Marouani - Temps X (1979 Music Video).mp3')
 
 		self.sound.register_music('main3', game_music_path + 'Transvolta_DiscoComputer.mp3')
 		self.sound.register_music('shooter3', game_music_path + 'DigitalEmotion_GoGoYellowScreen_90secondShooterLoop.wav')
