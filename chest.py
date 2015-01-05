@@ -29,10 +29,10 @@ from procgame import *
 import locale
 import logging
 
-class Chest(game.Mode):
+class ChestMode(game.Mode):
 	"""docstring for Bonus"""
 	def __init__(self, game, priority):
-			super(Chest, self).__init__(game, priority)
+			super(ChestMode, self).__init__(game, priority)
 			self.chestFilled = False
 			self.chestFilledPoints = 10000
 			self.chestFilledDisplayTime = 3
@@ -47,13 +47,15 @@ class Chest(game.Mode):
 			self.update_lamps()
 
 		for switch in self.game.switches:
-					if switch.name.find('chestMatrix', 0) != -1:
-						self.add_switch_handler(name=switch.name, event_type='active', \
-					                                delay=0.01, handler=self.chestMatrixSwitches)			
+			if switch.name.find('chestMatrix', 0) != -1:
+				self.add_switch_handler(name=switch.name, event_type='active', \
+				delay=0.01, handler=self.chestMatrixSwitches)
+		return super(ChestMode, self).mode_started()
+				
 	def mode_stopped(self):
 		#self.cancel_delayed('dropReset')
 		#self.game.utilities.set_player_stats('jackpot_level',1)
-		pass
+		return super(ChestMode, self).mode_stopped()
 
 	def update_lamps(self):
 		print "update_lamps"
@@ -144,7 +146,7 @@ class Chest(game.Mode):
 					if valueA == False:
 						self.game.lamps[keyA].enable() #Light same-named lamp
 						mycoldatadict[keyA] = True
-						otherrowdatadict = objPlayer.chestRowMatrix[int(keyA[12])-1]
+						otherrowdatadict = objPlayer.chestRowMatrix[int(keyA[11])-1]
 						for keyB, valueB in sorted(otherrowdatadict.items()):						
 							if keyB == keyA:
 								otherrowdatadict[keyB] = True
@@ -157,7 +159,6 @@ class Chest(game.Mode):
 			#Now check to see if the entire matrix is made			
 			if bOneColKnownComplete and sum(objPlayer.chestColMatrix[4].values())==5 and sum(objPlayer.chestColMatrix[3].values())==5 and sum(objPlayer.chestColMatrix[2].values())==5 and sum(objPlayer.chestColMatrix[1].values())==5 and sum(objPlayer.chestColMatrix[0].values())==5:
 				self.chestMade(self.chestFilledPoints)
-				pass
 			self.update_lamps()
 
 #Switch Denotation

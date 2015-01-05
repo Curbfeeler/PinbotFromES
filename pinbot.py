@@ -186,7 +186,7 @@ class PinbotFromES(game.BasicGame):
 		self.drops_mode = DropTargets(self,9)
 		self.jackpot_mode = Jackpot(self,12)
 		self.bonusmultiplier_mode = BonusMultiplier(self,98)
-		self.chest_mode = Chest(self,102)
+		self.chest_mode = ChestMode(self,102)
 		self.skillshot_mode = SkillshotMode(self,100)
 		self.multiball_mode = Multiball(self,101)
 		self.ballsaver_mode = BallSaver(self,199)

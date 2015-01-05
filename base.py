@@ -285,6 +285,16 @@ class BaseGameMode(game.Mode):
 	def sw_startButton_active_for_20ms(self, sw):
 		print 'Player: ' + str(self.game.players.index)
 		print 'Ball' + str(self.game.ball)
+		#Flash GI - Not using schedule
+		self.flashDelay = .1 #used for the delay between GI flashes
+		self.flashDelayGap = .1
+		self.game.utilities.disableGI()
+		self.delay(name='reenableGI',delay=self.flashDelay,handler=self.game.utilities.enableGI)
+		self.delay(name='disableGI',delay=(self.flashDelay*2)+self.flashDelayGap,handler=self.game.utilities.disableGI)
+		self.delay(name='reenableGI',delay=(self.flashDelay*3)+self.flashDelayGap,handler=self.game.utilities.enableGI)
+		self.flashDelay = .1 #used for the delay between GI flashes
+		self.flashDelayGap = .1
+
 		#Trough is full!
 		if self.game.ball == 0:
 			if self.game.utilities.troughIsFull()==True:
@@ -458,3 +468,6 @@ class BaseGameMode(game.Mode):
 		self.game.utilities.setBallInPlay(True)
 		self.game.utilities.score(100)
 		self.game.sound.play('inlane')
+
+	def sw_unused62_closed(self, sw):
+		self.game.utilities.acCoilPulse(coilname='feedShooter_UpperPFFLash',pulsetime=100)
