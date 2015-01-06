@@ -1,12 +1,14 @@
 /assets/*
 /procgame/*
 /gamedesign/*
-/stdout/*
-/DP Suite/*
-/config/settings.yaml
 /config/game_data.yaml
 /lamps/LampshowTimeCalculator.xlsx
 /lamps/fix.bat
+wingdbstub.py
+wingdebugpw
+*.zip
+*.wpr
+*.wpu
 #############
 ## Log File
 #############
