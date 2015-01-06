@@ -24,7 +24,6 @@
 #################################################################################
 
 import procgame.game
-import numpy as np
 
 class Player(procgame.game.Player):
 
@@ -46,6 +45,7 @@ class Player(procgame.game.Player):
 			### Bonus and Status #####################################
 			self.player_stats['status']=''
 			self.player_stats['bonus_x']=1
+			self.player_stats['energy_bonus']=0
 
 			#Switch Denotation
 			#chestMatrix01 #Row 0, Col 1, Yellow Switch - Hori

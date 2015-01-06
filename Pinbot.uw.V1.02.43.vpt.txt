@@ -188,11 +188,6 @@
 
  
  Sub pinbot_KeyDown(ByVal keycode)
-	If keycode = PlungerKey Then Plunger.PullBack:PKey=1:PTime.Enabled = 1
-  	If keycode = LeftTiltKey Then LeftNudge 80, 1, 20
-    If keycode = RightTiltKey Then RightNudge 280, 1, 20
-    If keycode = CenterTiltKey Then CenterNudge 0, 1, 25
-    If vpmKeyDown(keycode) Then Exit Sub 
 	If KeyCode=LeftFlipperKey and FlippersEnabled = True Then
 		Controller.Switch(10)=1
 		LeftFlipper.RotateToEnd
@@ -205,10 +200,14 @@
 		'RightFlipper2.RotateToEnd
 		Exit Sub
 	End If
+	If keycode = PlungerKey Then Plunger.PullBack:PKey=1:PTime.Enabled = 1
+  	If keycode = LeftTiltKey Then LeftNudge 80, 1, 20
+    If keycode = RightTiltKey Then RightNudge 280, 1, 20
+    If keycode = CenterTiltKey Then CenterNudge 0, 1, 25
+    If vpmKeyDown(keycode) Then Exit Sub 
 End Sub
 
 Sub pinbot_KeyUp(ByVal keycode)
-	If vpmKeyUp(keycode) Then Exit Sub
 	If keycode = PlungerKey Then Plunger.Fire:PlaySound "plunger":PTime.Enabled = 0:Pcount = 0:PTime2.Enabled = 1
 	If KeyCode=LeftFlipperKey Then
 		Controller.Switch(10)=0
@@ -222,6 +221,7 @@ Sub pinbot_KeyUp(ByVal keycode)
 		'RightFlipper2.RotateToStart
 		Exit Sub
 	End If
+	If vpmKeyUp(keycode) Then Exit Sub
 End Sub
 
    'Solenoids

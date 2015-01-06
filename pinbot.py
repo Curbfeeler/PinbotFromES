@@ -59,6 +59,7 @@ from jackpot import *
 from shelter import *
 from highscore import *
 from bonusmultiplier import *
+from vortex import *
 
 #### Mini Modes ####
 from mode_1 import *
@@ -185,8 +186,9 @@ class PinbotFromES(game.BasicGame):
 		self.attract_mode = AttractMode(self,5)
 		self.drops_mode = DropTargets(self,9)
 		self.jackpot_mode = Jackpot(self,12)
+		self.vortex_mode = VortexMode(self,97)
 		self.bonusmultiplier_mode = BonusMultiplier(self,98)
-		self.chest_mode = ChestMode(self,102)
+		self.chest_mode = ChestMode(self,99)
 		self.skillshot_mode = SkillshotMode(self,100)
 		self.multiball_mode = Multiball(self,101)
 		self.ballsaver_mode = BallSaver(self,199)
@@ -226,7 +228,7 @@ class PinbotFromES(game.BasicGame):
 		# Music Registration
 		self.sound.register_music('main1', game_music_path + 'Transvolta_DiscoComputer.mp3')
 		self.sound.register_music('shooter1', game_music_path + 'DigitalEmotion_GoGoYellowScreen_90secondShooterLoop.wav')
-		self.sound.register_music('multiball_intro1', game_music_path + 'Automat_Droid.mp3')
+		self.sound.register_music('multiball_intro1', game_music_path + 'Automat_Droid_SansIntro.ogg')
 		self.sound.register_music('multiball_loop1', game_music_path + 'ELO_HereIsTheNews.mp3')
 		self.sound.register_music('game_over1', game_music_path + 'TheDroids_TheForcePartsIandII.mp3')
 

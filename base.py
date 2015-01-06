@@ -216,6 +216,8 @@ class BaseGameMode(game.Mode):
 
 	def loadBallModes(self):
 		self.game.modes.add(self.game.skillshot_mode)
+		#self.game.modes.add(self.game.bonus_mode)
+		#self.game.modes.add(self.game.chest_mode) #not starting it on ball load for now.
 		#self.game.modes.add(self.game.centerramp_mode)
 		#self.game.modes.add(self.game.rightramp_mode)
 		self.game.modes.add(self.game.tilt)
@@ -226,12 +228,12 @@ class BaseGameMode(game.Mode):
 		#self.game.modes.add(self.game.multiball_mode)
 		#self.game.modes.add(self.game.collect_mode)
 		#self.game.modes.add(self.game.shelter_mode)
-		#self.game.modes.add(self.game.bonusmultiplier_mode)
-
+		
 	def unloadBallModes(self):
+		#self.game.modes.remove(self.game.bonus_mode)
 		self.game.modes.remove(self.game.skillshot_mode)
 		self.game.modes.remove(self.game.chest_mode)
-
+		self.game.modes.remove(self.game.vortex_mode)
 		#self.game.modes.remove(self.game.centerramp_mode)
 		#self.game.modes.remove(self.game.rightramp_mode)
 		self.game.modes.remove(self.game.tilt)
@@ -260,6 +262,13 @@ class BaseGameMode(game.Mode):
 		self.delay(delay=.2,handler=self.game.utilities.acFlashPulse,param='singleEjectHole_LeftInsertBDFlasher')
 		self.delay(delay=.4,handler=self.game.utilities.acCoilPulse,param='singleEjectHole_LeftInsertBDFlasher')
 		self.delay(delay=.6,handler=self.game.sound.play,param='ejectsaucer')
+
+	# extra method for adding bonus to make it shorter when used
+	def add_bonus(self,bonusname,points):
+		mybonus = self.game.utilities.get_player_stats(bonusname)
+		self.game.utilities.set_player_stats(bonusname,mybonus + points)
+		self.game.utilities.displayText(100,'ENERGY',str(mybonus + points),seconds=.5,justify='center')
+		#print "player_stats('bonus',points)" +str(points)
 
 	###############################################################
 	# BASE SWITCH HANDLING FUNCTIONS
@@ -342,19 +351,22 @@ class BaseGameMode(game.Mode):
 
 	def sw_jetMiddle_active(self, sw):
 		self.game.sound.play('jet')
-		self.game.utilities.score(500)
+		self.game.utilities.score(200)
+		self.add_bonus("energy_bonus",1000)
 		self.game.utilities.setBallInPlay(True)
 		return procgame.game.SwitchStop
 
 	def sw_jetBottom_active(self, sw):
 		self.game.sound.play('jet')
-		self.game.utilities.score(500)
+		self.game.utilities.score(200)
+		self.add_bonus("energy_bonus",1000)
 		self.game.utilities.setBallInPlay(True)
 		return procgame.game.SwitchStop
 
 	def sw_jetTop_active(self, sw):
 		self.game.sound.play('jet')
-		self.game.utilities.score(500)
+		self.game.utilities.score(200)
+		self.add_bonus("energy_bonus",1000)		
 		self.game.utilities.setBallInPlay(True)
 		return procgame.game.SwitchStop
 

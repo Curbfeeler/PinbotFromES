@@ -44,31 +44,38 @@ class BonusMultiplier(game.Mode):
 		self.multiplier = self.game.utilities.get_player_stats('bonus_x')
 
 		#### Clear Lamps ####
-		self.game.lamps.bonus2x.disable()
-		self.game.lamps.bonus3x.disable()
-		self.game.lamps.bonus4x.disable()
-		self.game.lamps.bonus5x.disable()
-
+		self.game.lamps.x2Bonus.disable()
+		self.game.lamps.x3Bonus.disable()
+		self.game.lamps.x4Bonus.disable()
+		self.game.lamps.x5Bonus.disable()
 
 		if (self.multiplier > 1):
-			self.game.lamps.bonus2x.enable()
+			self.game.lamps.x2Bonus.enable()
 		if (self.multiplier > 2):
-			self.game.lamps.bonus3x.enable()
+			self.game.lamps.x3Bonus.enable()
 		if (self.multiplier > 3):
-			self.game.lamps.bonus4x.enable()
+			self.game.lamps.x4Bonus.enable()
 		if (self.multiplier > 4):
-			self.game.lamps.bonus5x.enable()
+			self.game.lamps.x5Bonus.enable()
 			
 	def incrementBonusMultiplier(self):
 		self.multiplier = self.game.utilities.get_player_stats('bonus_x')
 		if (self.multiplier <> 5):
+			self.game.utilities.log('BALLSAVE - Ouhole closed - SwitchContinue','info')
+			self.game.utilities.displayText(100,'BONUS AT',str(self.multiplier + 1) +'X',seconds=1,justify='center')
 			self.game.utilities.set_player_stats('bonus_x',self.multiplier + 1)
 			self.update_lamps()
 		else:
 			#### Bonus Maxed ####
 			pass
-
 		
+	def sw_exitRamp_closed(self, sw):
+		self.incrementBonusMultiplier()
+		return procgame.game.SwitchContinue		
 		
-
+	def sw_shooter_active_for_200ms(self, sw):
+		if self.game.switches.exitRamp.time_since_change() < 3:
+			print self.game.switches.exitRamp.time_since_change()
+			self.game.modes.add(self.game.vortex_mode)
+		return procgame.game.SwitchContinue	
 

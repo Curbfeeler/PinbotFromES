@@ -166,6 +166,8 @@ class SkillshotMode(game.Mode):
 		self.game.sound.play_music('main'+ str(self.game.ball),loops=1,music_volume=.5)				
 		self.game.modes.remove(self)
 		self.game.modes.add(self.game.chest_mode)
+		self.game.modes.add(self.game.bonusmultiplier_mode)
+
 
 	def sw_shooter_active_for_8000ms(self, sw):
 		#########################
@@ -187,6 +189,8 @@ class SkillshotMode(game.Mode):
 		self.game.sound.play_music('main'+ str(self.game.ball),loops=1,music_volume=.5)				
 		self.game.modes.remove(self)
 		self.game.modes.add(self.game.chest_mode)
+		self.game.modes.add(self.game.bonusmultiplier_mode)
+
 
 	def skillshotMissed(self):
 		self.game.utilities.displayText(100,'SKILLSHOT','MISSED',seconds=self.skillshotDisplayTime,justify='center')
@@ -195,6 +199,8 @@ class SkillshotMode(game.Mode):
 		self.game.sound.play_music('main'+ str(self.game.ball),loops=1,music_volume=.5)
 		self.game.modes.remove(self)
 		self.game.modes.add(self.game.chest_mode)
+		self.game.modes.add(self.game.bonusmultiplier_mode)
+
 		
 	def vortexMade(self, iPoints):
 		self.game.utilities.displayText(100,'VORTEX',locale.format("%d", iPoints * self.game.utilities.get_player_stats('skillshot_x'), grouping=True) + ' POINTS',seconds=self.skillshotDisplayTime,justify='center')
@@ -206,7 +212,9 @@ class SkillshotMode(game.Mode):
 		self.game.sound.stop_music()
 		self.game.sound.play_music('main'+ str(self.game.ball),loops=1,music_volume=.5)				
 		self.game.modes.remove(self)
-		self.game.modes.add(self.game.chest_mode)		
+		self.game.modes.add(self.game.chest_mode)
+		self.game.modes.add(self.game.bonusmultiplier_mode)
+	
 		
 
 	###########################
@@ -215,7 +223,8 @@ class SkillshotMode(game.Mode):
 
 	def sw_outhole_closed_for_1s(self, sw):
 		#### Remove Skillshot Mode ####
-		self.game.modes.remove(self.game.skillshot_mode)
+		self.game.modes.remove(self)
+		self.game.modes.add(self.game.chest_mode)
 		return procgame.game.SwitchContinue
 
 	def sw_vortex5k_active(self, sw):

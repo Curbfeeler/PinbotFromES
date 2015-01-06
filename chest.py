@@ -30,12 +30,16 @@ import locale
 import logging
 
 class ChestMode(game.Mode):
-	"""docstring for Bonus"""
+	"""docstring for ChestMode"""
 	def __init__(self, game, priority):
 			super(ChestMode, self).__init__(game, priority)
 			self.chestFilled = False
 			self.chestFilledPoints = 10000
 			self.chestFilledDisplayTime = 3
+			for switch in self.game.switches:
+				if switch.name.find('chestMatrix', 0) != -1:
+					self.add_switch_handler(name=switch.name, event_type='active', \
+					delay=0.01, handler=self.chestMatrixSwitches)			
 
 	def mode_started(self):
 		#### Load Mode Feature Defaults ####
@@ -46,15 +50,9 @@ class ChestMode(game.Mode):
 		else:
 			self.update_lamps()
 
-		for switch in self.game.switches:
-			if switch.name.find('chestMatrix', 0) != -1:
-				self.add_switch_handler(name=switch.name, event_type='active', \
-				delay=0.01, handler=self.chestMatrixSwitches)
 		return super(ChestMode, self).mode_started()
 				
 	def mode_stopped(self):
-		#self.cancel_delayed('dropReset')
-		#self.game.utilities.set_player_stats('jackpot_level',1)
 		return super(ChestMode, self).mode_stopped()
 
 	def update_lamps(self):
