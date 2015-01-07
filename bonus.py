@@ -59,7 +59,32 @@ class Bonus(game.Mode):
 	def calculate(self,callback):
 		#self.game.sound.play_music('bonus'+ str(self.game.ball), loops=1)
 		self.callback = callback
-		self.total_value = self.game.utilities.get_player_stats('bonus_x')
+		self.total_value = self.game.utilities.get_player_stats('bonus') * self.game.utilities.get_player_stats('bonus_x')
+		self.bonus()
+
+	def bonus(self):
+		myBonus = self.game.utilities.get_player_stats('bonus')
+		self.delay(delay=6,handler=self.dummy_handler)
+		if myBonus > 0:
+			myMultiplier = self.game.utilities.get_player_stats('bonus_x')
+			if myMultiplier == 1:
+				self.game.utilities.displayText(102,'END BALL BONUS',locale.format("%d", myBonus, grouping=True),seconds=3,justify='center')
+			else:
+				self.game.utilities.displayText(102,'END BALL BONUS',locale.format("%d", myBonus, grouping=True) +'X' +str(myMultiplier),seconds=3,justify='center')
+				self.delay(delay=6,handler=self.dummy_handler)
+				for x in range(1, myMultiplier):
+					myNewBonus = myBonus + myBonus
+					self.game.utilities.displayText(102,'END BALL BONUS',locale.format("%d", myNewBonus, grouping=True) +'X' +str(myMultiplier-x),seconds=1,justify='center')
+					self.delay(name="",delay=6,handler=self.dummy_handler)
+			self.game.utilities.score(myBonus*myMultiplier)
+			self.delay(delay=6,handler=self.dummy_handler)
+		else:
+			self.game.utilities.displayText(102,'END OF BALL','NO BONUS',seconds=3,justify='center')
+			self.delay(delay=6,handler=self.dummy_handler)
+
+	def dummy_handler(self):
+		print 'sat here two seconds...'
+		pass
 
 	def multiplier(self):
 		self.game.utilities.displayText(priority=self.priority,topText='X'+str(self.game.utilities.get_player_stats('bonus_x')).upper(),bottomText=locale.format("%d", self.total_value, True),justify='center',seconds=self.delay_time)

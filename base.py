@@ -130,6 +130,7 @@ class BaseGameMode(game.Mode):
 		
 		if self.game.tiltStatus == 0:
 			self.game.bonus_mode.calculate(self.game.base_mode.end_ball)
+		
 		self.end_ball()
 		
 	def end_ball(self):
@@ -244,7 +245,7 @@ class BaseGameMode(game.Mode):
 		#self.game.modes.remove(self.game.multiball_mode)
 		#self.game.modes.remove(self.game.collect_mode)
 		#self.game.modes.remove(self.game.shelter_mode)
-		#self.game.modes.remove(self.game.bonusmultiplier_mode)
+		self.game.modes.remove(self.game.bonusmultiplier_mode)
 
 		### Clear Mini Modes ###
 		self.game.modes.remove(self.game.mode_1)
@@ -353,6 +354,8 @@ class BaseGameMode(game.Mode):
 		self.game.sound.play('jet')
 		self.game.utilities.score(200)
 		self.add_bonus("energy_bonus",1000)
+		self.add_bonus("bonus",100)
+
 		self.game.utilities.setBallInPlay(True)
 		return procgame.game.SwitchStop
 
@@ -360,13 +363,15 @@ class BaseGameMode(game.Mode):
 		self.game.sound.play('jet')
 		self.game.utilities.score(200)
 		self.add_bonus("energy_bonus",1000)
+		self.add_bonus("bonus",100)
 		self.game.utilities.setBallInPlay(True)
 		return procgame.game.SwitchStop
 
 	def sw_jetTop_active(self, sw):
 		self.game.sound.play('jet')
 		self.game.utilities.score(200)
-		self.add_bonus("energy_bonus",1000)		
+		self.add_bonus("energy_bonus",1000)
+		self.add_bonus("bonus",100)		
 		self.game.utilities.setBallInPlay(True)
 		return procgame.game.SwitchStop
 

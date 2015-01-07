@@ -51,7 +51,7 @@ class SkillshotMode(game.Mode):
 		self.game.utilities.set_player_stats('skillshot_active',True)
 		self.update_lamps()
 #                                                   0                * 0                *
-		self.game.utilities.displayText(100,'CHASER FOR SKILL','OR SHOOT VORTEX',seconds=6,justify='center')
+		self.game.utilities.displayText(80,'CHASER FOR SKILL','OR SHOOT VORTEX',seconds=6,justify='center')
 		return super(SkillshotMode, self).mode_started()
 
 	def mode_stopped(self):
