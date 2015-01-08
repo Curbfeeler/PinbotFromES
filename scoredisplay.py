@@ -79,8 +79,8 @@ class AlphaScoreDisplay(game.ScoreDisplay):
                 self.log.debug('reset called')
                 #cancel any delays
                 for i in range(2):
-                    self.cancel_delayed('text_blink_repeat'+str(i))
-                    self.cancel_delayed('transition_loop'+str(i))
+			self.cancel_delayed('text_blink_repeat'+str(i))
+			self.cancel_delayed('transition_loop'+str(i))
                 
                 #define the display data lists
                 self.top_text_data=[]
@@ -368,9 +368,6 @@ class AlphaScoreDisplay(game.ScoreDisplay):
                 self.transition_reveal_posn[row] = 0
                 if seconds>0:
                     self.delay(name='restore_display',delay=seconds,handler=self.restore)
-
-            
-
 
 	def update_alpha_display(self):
 		#using gerry's builtin procgame method for now

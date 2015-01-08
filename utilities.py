@@ -145,6 +145,22 @@ class UtilitiesMode(game.Mode):
 			#cannot since the delay function does not allow me to pass more than 1 parameter :(
 			pass
 
+	###########################
+	#### Display Functions ####
+	###########################
+	def displayTextNoInterrupt(self,priority,topText=' ',bottomText=' ',seconds=2,justify='left',topBlinkRate=0,bottomBlinkRate=0):
+		# This function will be used as a very basic display prioritizing helper
+		# Check if anything with a higher priority is running
+		#if (priority >= self.currentDisplayPriority):
+		self.game.alpha_score_display.set_text(topText,0,justify,seconds=seconds)
+		self.game.alpha_score_display.set_text(bottomText,1,justify,seconds=seconds)
+		self.delay(name=None,event_type=None,delay=seconds,handler=self.dummyMethod)
+		#pinproc.aux_command_delay(seconds*1000)
+		pass
+		
+	def dummyMethod(self):
+		pass
+
 	
 	###########################
 	#### Display Functions ####
@@ -155,8 +171,8 @@ class UtilitiesMode(game.Mode):
 		if (priority >= self.currentDisplayPriority):
 			self.cancel_delayed('resetDisplayPriority')
 			self.game.alpha_score_display.cancel_script()
-			self.game.alpha_score_display.set_text(topText,0,justify)
-			self.game.alpha_score_display.set_text(bottomText,1,justify)
+			self.game.alpha_score_display.set_text(topText,0,justify,seconds=seconds)
+			self.game.alpha_score_display.set_text(bottomText,1,justify,seconds=seconds)
 			self.delay(name='resetDisplayPriority',event_type=None,delay=seconds,handler=self.resetDisplayPriority)
 			self.currentDisplayPriority = priority
 

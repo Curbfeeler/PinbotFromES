@@ -60,27 +60,19 @@ class Bonus(game.Mode):
 		#self.game.sound.play_music('bonus'+ str(self.game.ball), loops=1)
 		self.callback = callback
 		self.total_value = self.game.utilities.get_player_stats('bonus') * self.game.utilities.get_player_stats('bonus_x')
-		self.bonus()
 
-	def bonus(self):
-		myBonus = self.game.utilities.get_player_stats('bonus')
-		self.delay(delay=6,handler=self.dummy_handler)
-		if myBonus > 0:
-			myMultiplier = self.game.utilities.get_player_stats('bonus_x')
-			if myMultiplier == 1:
-				self.game.utilities.displayText(102,'END BALL BONUS',locale.format("%d", myBonus, grouping=True),seconds=3,justify='center')
-			else:
-				self.game.utilities.displayText(102,'END BALL BONUS',locale.format("%d", myBonus, grouping=True) +'X' +str(myMultiplier),seconds=3,justify='center')
-				self.delay(delay=6,handler=self.dummy_handler)
-				for x in range(1, myMultiplier):
-					myNewBonus = myBonus + myBonus
-					self.game.utilities.displayText(102,'END BALL BONUS',locale.format("%d", myNewBonus, grouping=True) +'X' +str(myMultiplier-x),seconds=1,justify='center')
-					self.delay(name="",delay=6,handler=self.dummy_handler)
-			self.game.utilities.score(myBonus*myMultiplier)
-			self.delay(delay=6,handler=self.dummy_handler)
-		else:
-			self.game.utilities.displayText(102,'END OF BALL','NO BONUS',seconds=3,justify='center')
-			self.delay(delay=6,handler=self.dummy_handler)
+	def setMyDisplayContent(self):
+		#### Script List Variable Initialization ####
+		script=[]
+
+		script.append({'top':'TRANSITION 0','bottom':'TRANSITION 0','timer':2,'transition':0})
+		script.append({'top':'TRANSITION 1','bottom':'TRANSITION 1','timer':8,'transition':1})
+		script.append({'top':'TRANSITION 2','bottom':'TRANSITION 2','timer':2,'transition':2})
+		script.append({'top':'TRANSITION 3','bottom':'TRANSITION 3','timer':2,'transition':3})
+		script.append({'top':'TRANSITION 4','bottom':'TRANSITION 4','timer':2,'transition':4})
+		#Cancel any score display scripts that may be running
+		self.game.alpha_score_display.cancel_script()
+		self.game.alpha_score_display.set_script(script)
 
 	def dummy_handler(self):
 		print 'sat here two seconds...'

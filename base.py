@@ -129,9 +129,25 @@ class BaseGameMode(game.Mode):
 		self.game.modes.add(self.game.bonus_mode)
 		
 		if self.game.tiltStatus == 0:
-			self.game.bonus_mode.calculate(self.game.base_mode.end_ball)
-		
-		self.end_ball()
+			self.game.bonus_mode.calculate(self.game.base_mode.finish_ball)
+			#### Script List Variable Initialization ####
+			script=[]
+			
+			myBonus = self.game.utilities.get_player_stats('bonus')
+			if myBonus > 0:
+				myMultiplier = self.game.utilities.get_player_stats('bonus_x')
+				if myMultiplier == 1:
+					self.game.utilities.displayText(102,'END BALL BONUS',locale.format("%d", myBonus, grouping=True),seconds=5,justify='center')
+				else:
+					self.game.utilities.displayText(102,'END BALL BONUS',locale.format("%d", myBonus, grouping=True) +' X' +str(myMultiplier),seconds=5,justify='center')
+					for x in range(1, myMultiplier):
+						myNewBonus = myBonus + myBonus
+						self.game.utilities.displayText(102,'END BALL BONUS',locale.format("%d", myNewBonus, grouping=True) +' X' +str(myMultiplier-x),seconds=5,justify='center')						
+				self.game.utilities.score(myBonus*myMultiplier)
+			else:
+				self.game.utilities.displayText(102,'END OF BALL','NO BONUS',seconds=5,justify='center')
+			self.delay(delay=6,handler=self.end_ball)
+
 		
 	def end_ball(self):
 		#Remove Bonus
