@@ -64,7 +64,9 @@ class Multiball(game.Mode):
 			#print "Lock 3 is Lit"
 
 	def open_visor(self):
-		self.game.coils.visorMotor.pulse(100)
+		self.game.coils.visorMotor.enable()
+		self.ballLock1Lit = True
+		self.ballLock2Lit = True		
 			
 	#def disableLockLamps(self):
 		#self.game.lamps.rightRampLock.disable()
@@ -95,21 +97,31 @@ class Multiball(game.Mode):
 			self.getUserStats()
 		self.update_lamps()
 
-	def lockBall1(self):
+	def lockLeftEyeBall(self):
 		self.game.sound.play('ball_lock_1')
 		self.game.utilities.set_player_stats('balls_locked',1)
 		self.game.utilities.set_player_stats('lock1_lit',False)
 		self.getUserStats()
 		self.update_lamps()
-		self.callback()
+		self.game.utilities.displayText(100,'LEFT EYE','MADE',seconds=3,justify='center')
+		self.game.utilities.score(1000)
+		self.game.lampctrlflash.play_show('skillshot', repeat=False, callback=self.game.update_lamps)
+		self.game.trough.launch_balls(num=1)
+		self.ballLock1Lit = False
+		#self.callback()
 
-	def lockBall2(self):
+	def lockRightEyeBall(self):
 		self.game.sound.play('ball_lock_2')
 		self.game.utilities.set_player_stats('balls_locked',2)
 		self.game.utilities.set_player_stats('lock2_lit',False)
 		self.getUserStats()
 		self.update_lamps()
-		self.callback()
+		self.game.utilities.displayText(100,'RIGHT EYE','MADE',seconds=3,justify='center')
+		self.game.utilities.score(1000)
+		self.game.lampctrlflash.play_show('skillshot', repeat=False, callback=self.game.update_lamps)
+		self.game.trough.launch_balls(num=1)
+		self.ballLock2Lit = True	
+		#self.callback()
 
 	def startMultiball(self):
 		self.multiballStarting = True
@@ -194,7 +206,32 @@ class Multiball(game.Mode):
 			#self.stopMultiball()
 		return procgame.game.SwitchContinue
 
+	def sw_leftEyeball_closed_for_100ms(self, sw):
+		if (self.ballLock1Lit == True):
+			self.lockLeftEyeBall()
+		return procgame.game.SwitchContinue
+
+	def sw_rightEyeball_closed_for_100ms(self, sw):
+		if (self.ballLock1Lit == True):
+			self.lockRightEyeBall()
+		return procgame.game.SwitchContinue
+
+
+	#EJECTS/EYEBALLS
+	    #rightEyeball:
+		#number: S42
+		#label: 'Right Eye Eject'
+	    #leftEyeball:
+		#number: S41
+		#label: 'Left Eye Eject'
+
+
+
 	def sw_visorClosed_open_for_100ms(self, sw):
+		self.open_visor()
+		return procgame.game.SwitchContinue
+
+	def sw_visorOpen_closed_for_100ms(self, sw):
 		self.open_visor()
 		return procgame.game.SwitchContinue
 

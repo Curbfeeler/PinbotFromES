@@ -74,7 +74,7 @@ class BonusMultiplier(game.Mode):
 		return procgame.game.SwitchContinue		
 		
 	def sw_shooter_active_for_200ms(self, sw):
-		if self.game.switches.exitRamp.time_since_change() < 3:
+		if self.game.switches.exitRamp.time_since_change() < 5:
 			print self.game.switches.exitRamp.time_since_change()
 			self.game.modes.add(self.game.vortex_mode)
 		return procgame.game.SwitchContinue	

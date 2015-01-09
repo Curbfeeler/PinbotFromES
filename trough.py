@@ -318,6 +318,7 @@ class Trough(procgame.game.Mode):
 			stealth should be used.
 		"""
 
+		#self.num_balls_to_launch = num
 		self.num_balls_to_launch += num
                 #self.autolaunch = autolaunch
 		if stealth:
