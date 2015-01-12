@@ -146,6 +146,13 @@ class BaseGameMode(game.Mode):
 				self.game.utilities.score(myBonus*myMultiplier)
 			else:
 				self.game.utilities.displayText(102,'END OF BALL','NO BONUS',seconds=5,justify='center')
+			#if self.game.switches.leftEyeBall.is_closed() == True:
+					#self.game.Coils.('Dummy')
+			#if self.game.switches.rightEyeBall.is_closed() == True:
+					#self.game.Coils.('Dummy')
+			self.game.utilities.releaseStuckBalls()
+
+
 			self.delay(delay=6,handler=self.end_ball)
 
 		
@@ -247,7 +254,7 @@ class BaseGameMode(game.Mode):
 		#self.game.modes.add(self.game.shelter_mode)
 		
 	def unloadBallModes(self):
-		#self.game.modes.remove(self.game.bonus_mode)
+		self.game.modes.remove(self.game.bonus_mode)
 		self.game.modes.remove(self.game.skillshot_mode)
 		self.game.modes.remove(self.game.chest_mode)
 		self.game.modes.remove(self.game.vortex_mode)
@@ -258,7 +265,7 @@ class BaseGameMode(game.Mode):
 		self.game.modes.remove(self.game.drops_mode)
 		#self.game.modes.remove(self.game.jackpot_mode)
 		#self.game.modes.remove(self.game.spinner_mode)
-		#self.game.modes.remove(self.game.multiball_mode)
+		self.game.modes.remove(self.game.multiball_mode)
 		#self.game.modes.remove(self.game.collect_mode)
 		#self.game.modes.remove(self.game.shelter_mode)
 		self.game.modes.remove(self.game.bonusmultiplier_mode)

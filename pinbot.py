@@ -229,7 +229,7 @@ class PinbotFromES(game.BasicGame):
 		self.sound.register_music('main1', game_music_path + 'Transvolta_DiscoComputer.mp3')
 		self.sound.register_music('shooter1', game_music_path + 'DigitalEmotion_GoGoYellowScreen_90secondShooterLoop.wav')
 		self.sound.register_music('multiball_intro1', game_music_path + 'Automat_Droid_SansIntro.ogg')
-		self.sound.register_music('multiball_loop1', game_music_path + 'ELO_HereIsTheNews.mp3')
+		self.sound.register_music('multiball_loop1', game_music_path + 'Lifelike - So Electric.mp3')
 		self.sound.register_music('game_over1', game_music_path + 'TheDroids_TheForcePartsIandII.mp3')
 
 		self.sound.register_music('main2', game_music_path + 'Kraftwerk - Computer Love.mp3')
@@ -277,7 +277,7 @@ class PinbotFromES(game.BasicGame):
 		self.sound.register_sound('player_3_up_vox', game_sound_path + 'player3vox.wav')
 		self.sound.register_sound('player_4_up_vox', game_sound_path + 'player4vox.wav')
 		# Multiball Sounds #
-		self.sound.register_sound('earthquake_1', game_sound_path + '1.wav')
+		self.sound.register_sound('multiball_1', game_sound_path + 'Spaceship_Alarm.mp3')
 		self.sound.register_sound('main_loop_tape_stop', game_sound_path + 'music_001_main_loop_stop.wav',new_sound_volume=.5)
 		self.sound.register_sound('short_out_1', game_sound_path + '1.wav')
 		self.sound.register_sound('short_out_2', game_sound_path + '1.wav')

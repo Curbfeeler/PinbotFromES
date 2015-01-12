@@ -45,6 +45,7 @@ class Multiball(game.Mode):
 		return super(Multiball, self).mode_started()
 
 	def mode_stopped(self):
+		self.stopMultiball()
 		pass
 
 	def update_lamps(self):
@@ -66,7 +67,9 @@ class Multiball(game.Mode):
 	def open_visor(self):
 		self.game.coils.visorMotor.enable()
 		self.ballLock1Lit = True
+		self.game.utilities.set_player_stats('lock1_lit', self.ballLock1Lit)
 		self.ballLock2Lit = True		
+		self.game.utilities.set_player_stats('lock2_lit',self.ballLock2Lit)
 			
 	#def disableLockLamps(self):
 		#self.game.lamps.rightRampLock.disable()
@@ -83,23 +86,24 @@ class Multiball(game.Mode):
 		#print "Lock 3: " + str(self.game.utilities.get_player_stats('lock3_lit'))
 		print "Balls Locked: " + str(self.game.utilities.get_player_stats('balls_locked'))
 
-	def liteLock(self,callback):
-		self.callback = callback
-		if (self.ballsLocked == 0):
-			self.game.utilities.set_player_stats('lock1_lit',True)
-			print "Setting Ball 1 Lock to Lit"
-			self.getUserStats()
-		elif (self.ballsLocked == 1):
-			self.game.utilities.set_player_stats('lock2_lit',True)
-			self.getUserStats()
-		elif (self.ballsLocked == 2):
-			self.game.utilities.set_player_stats('lock3_lit',True)
-			self.getUserStats()
-		self.update_lamps()
+	#def liteLock(self,callback):
+		#self.callback = callback
+		#if (self.ballsLocked == 0):
+			#self.game.utilities.set_player_stats('lock1_lit',True)
+			#print "Setting Ball 1 Lock to Lit"
+			#self.getUserStats()
+		#elif (self.ballsLocked == 1):
+			#self.game.utilities.set_player_stats('lock2_lit',True)
+			#self.getUserStats()
+		#elif (self.ballsLocked == 2):
+			#self.game.utilities.set_player_stats('lock3_lit',True)
+			#self.getUserStats()
+		#self.update_lamps()
 
 	def lockLeftEyeBall(self):
 		self.game.sound.play('ball_lock_1')
-		self.game.utilities.set_player_stats('balls_locked',1)
+		self.game.utilities.set_player_stats('ball1_locked',True)
+		self.game.utilities.set_player_stats('balls_locked',self.game.utilities.get_player_stats('balls_locked') + 1)
 		self.game.utilities.set_player_stats('lock1_lit',False)
 		self.getUserStats()
 		self.update_lamps()
@@ -109,10 +113,13 @@ class Multiball(game.Mode):
 		self.game.trough.launch_balls(num=1)
 		self.ballLock1Lit = False
 		#self.callback()
+		if self.game.utilities.get_player_stats('balls_locked')==2:
+			self.startMultiball()		
 
 	def lockRightEyeBall(self):
 		self.game.sound.play('ball_lock_2')
-		self.game.utilities.set_player_stats('balls_locked',2)
+		self.game.utilities.set_player_stats('ball2_locked',True)
+		self.game.utilities.set_player_stats('balls_locked',self.game.utilities.get_player_stats('balls_locked') + 1)
 		self.game.utilities.set_player_stats('lock2_lit',False)
 		self.getUserStats()
 		self.update_lamps()
@@ -120,14 +127,16 @@ class Multiball(game.Mode):
 		self.game.utilities.score(1000)
 		self.game.lampctrlflash.play_show('skillshot', repeat=False, callback=self.game.update_lamps)
 		self.game.trough.launch_balls(num=1)
-		self.ballLock2Lit = True	
+		self.ballLock2Lit = False	
 		#self.callback()
+		if self.game.utilities.get_player_stats('balls_locked')==2:
+			self.startMultiball()
 
 	def startMultiball(self):
 		self.multiballStarting = True
 		self.game.utilities.set_player_stats('multiball_running',True)
 		self.resetMultiballStats()
-		self.game.collect_mode.incrementActiveZoneLimit()
+		#self.game.collect_mode.incrementActiveZoneLimit()
 		self.getUserStats()
 		self.update_lamps()
 		self.multiballIntro()
@@ -136,45 +145,54 @@ class Multiball(game.Mode):
 		self.cancel_delayed('dropReset')
 		self.game.utilities.disableGI()
 		self.game.sound.stop_music()
-		self.game.lampctrlflash.play_show('multiball_intro_1', repeat=False)
-		self.game.utilities.randomLampPulse(100)
+		#self.game.lampctrlflash.play_show('multiball_intro_1', repeat=False)
+		#self.game.utilities.randomLampPulse(100)
 		# Sound FX #
-		self.game.sound.play('earthquake_1')
-		self.game.sound.play_music('multiball_intro'+ str(self.game.ball),loops=1,music_volume=.5)
+		self.game.sound.play('multiball_1')
+		self.game.sound.play_music('multiball_loop'+ str(self.game.ball),loops=1,music_volume=.5)
 		#Short Out Noises
-		self.delay(delay=2,handler=self.game.sound.play,param='short_out_2')
-		self.delay(delay=3,handler=self.game.sound.play,param='short_out_1')
-		self.delay(delay=4.5,handler=self.game.sound.play,param='short_out_1')
-		self.delay(delay=6,handler=self.game.sound.play,param='short_out_2')
-		self.delay(delay=8,handler=self.game.sound.play,param='short_out_1')
-		self.delay(delay=9,handler=self.game.sound.play,param='short_out_2')
-		self.delay(delay=10,handler=self.game.sound.play,param='short_out_1')
+		#self.delay(delay=2,handler=self.game.sound.play,param='short_out_2')
+		#self.delay(delay=3,handler=self.game.sound.play,param='short_out_1')
+		#self.delay(delay=4.5,handler=self.game.sound.play,param='short_out_1')
+		#self.delay(delay=6,handler=self.game.sound.play,param='short_out_2')
+		#self.delay(delay=8,handler=self.game.sound.play,param='short_out_1')
+		#self.delay(delay=9,handler=self.game.sound.play,param='short_out_2')
+		#self.delay(delay=10,handler=self.game.sound.play,param='short_out_1')
 		
 		#self.game.coils.quakeMotor.schedule(schedule=0x08080808,cycle_seconds=-1,now=True)
 		self.resetMultiballStats()
-		self.delay(delay=self.multiballIntroLength,handler=self.multiballRun)
+		self.delay(delay=8,handler=self.multiballRun)
 
 	def multiballRun(self):
 		self.game.utilities.enableGI()
 		#self.game.coils.quakeMotor.patter(on_time=15,off_time=100)
-		self.game.utilities.enableMultiballQuake()
-		self.game.sound.play('centerRampComplete')
+		#self.game.utilities.enableMultiballQuake()
+		#self.game.sound.play('centerRampComplete')
 		self.game.sound.play_music('multiball_loop'+ str(self.game.ball),loops=-1,music_volume=.6)
-		self.game.utilities.acCoilPulse(coilname='singleEjectHole_LeftInsertBDFlasher',pulsetime=50)
+		#self.game.utilities.acCoilPulse(coilname='singleEjectHole_LeftInsertBDFlasher',pulsetime=50)
+		#self.game.utilities.acFlashPulse('singleEjectHole_LeftInsertBDFlasher')
+		if self.game.switches.rightEyeball.is_active()==True:
+			self.game.utilities.acCoilPulse(coilname='rightEyeballEject_SunFlasher',pulsetime=50)
+		if self.game.switches.leftEyeball.is_active()==True:
+			self.game.utilities.acCoilPulse(coilname='leftEyeballEject_LeftPlayfieldFlasher',pulsetime=50)
+		if self.game.switches.singleEject.is_active()==True:
+			self.game.utilities.acCoilPulse(coilname='singleEjectHole_LeftInsertBDFlasher',pulsetime=50)
+		
+		
 		#self.game.trough.launch_balls(num=2)
 		self.multiballStarting = False
 		self.game.update_lamps()
 
 	def stopMultiball(self):
 		self.game.utilities.set_player_stats('multiball_running',False)
-		self.game.utilities.set_player_stats('jackpot_lit',False)
+		#self.game.utilities.set_player_stats('jackpot_lit',False)
 		self.game.sound.stop_music()
 		self.game.sound.play_music('main'+ str(self.game.ball),loops=-1,music_volume=.5)
 		self.resetMultiballStats()
-		self.game.bonusmultiplier_mode.incrementBonusMultiplier()
+		#self.game.bonusmultiplier_mode.incrementBonusMultiplier()
 		self.game.update_lamps()
-		self.game.coils.quakeMotor.disable()
-		self.callback()
+		#self.game.coils.quakeMotor.disable()
+		#self.callback()
 
 	def resetMultiballStats(self):
 		self.game.utilities.set_player_stats('lock1_lit',False)
@@ -200,11 +218,11 @@ class Multiball(game.Mode):
 			#return procgame.game.SwitchContinue
 
 
-	def sw_outhole_closed_for_500ms(self, sw):
-		#if (self.game.trough.num_balls_in_play == 2):
-			#Last ball - Need to stop multiball
-			#self.stopMultiball()
-		return procgame.game.SwitchContinue
+	#def sw_outhole_closed_for_500ms(self, sw):
+		##if (self.game.trough.num_balls_in_play == 2):
+			##Last ball - Need to stop multiball
+			##self.stopMultiball()
+		#return procgame.game.SwitchContinue
 
 	def sw_leftEyeball_closed_for_100ms(self, sw):
 		if (self.ballLock1Lit == True):
@@ -212,7 +230,7 @@ class Multiball(game.Mode):
 		return procgame.game.SwitchContinue
 
 	def sw_rightEyeball_closed_for_100ms(self, sw):
-		if (self.ballLock1Lit == True):
+		if (self.ballLock2Lit == True):
 			self.lockRightEyeBall()
 		return procgame.game.SwitchContinue
 

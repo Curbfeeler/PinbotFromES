@@ -89,6 +89,7 @@ class ChestMode(game.Mode):
 		self.game.sound.stop_music()
 		self.game.sound.play_music('multiball_intro'+ str(self.game.ball),loops=1,music_volume=.5)				
 		self.game.modes.remove(self)
+		self.resetChest()		
 		self.game.modes.add(self.game.multiball_mode)
 
 

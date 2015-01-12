@@ -180,6 +180,9 @@ class Player(procgame.game.Player):
 			self.player_stats['lock3_lit']=False
 			self.player_stats['multiball_running']=False
 			self.player_stats['balls_locked']=0
+			self.player_stats['ball1_locked']=False
+			self.player_stats['ball2_locked']=False
+			self.player_stats['ball3_locked']=False
 
 			### Right Ramp Stats #####################################
 			self.player_stats['fault_visits']=0
