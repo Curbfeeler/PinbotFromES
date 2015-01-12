@@ -30,6 +30,7 @@ import random
 import time
 import sys
 import locale
+import logging
 
 #from bonus import *
 
@@ -37,14 +38,16 @@ class BaseGameMode(game.Mode):
 	def __init__(self, game, priority):
 			#locale.setlocale(locale.LC_ALL, '') #Might not be needed
 			super(BaseGameMode, self).__init__(game, priority)
-			
+			self.log = logging.getLogger('pinbot.base')
 			
 	def mode_started(self):
 			#Start Attract Mode
+			self.log.info("Calling: BaseGameMode.mode_started")
 			self.game.modes.add(self.game.attract_mode)
 			self.game.utilities.releaseStuckBalls()
 
 	def update_lamps(self):
+		self.log.info("Calling: BaseGameMode.update_lamps")
 		self.game.lamps.ballInPlayBackBox.enable()
 		#self.game.lamps.jetRightLamp.enable()
 		#self.game.lamps.jetTopLamp.enable()
@@ -53,7 +56,9 @@ class BaseGameMode(game.Mode):
 	# MAIN GAME HANDLING FUNCTIONS
 	###############################################################
 	def start_game(self):
-		self.game.utilities.log('Start Game','info')
+		self.log.info("Calling: BaseGameMode.start_game")
+#		self.log.info("Start: mode_started")
+#		self.game.utilities.log('Start Game','info')
 
 		self.game.sound.stop_music()
 
@@ -70,17 +75,14 @@ class BaseGameMode(game.Mode):
 		
 		self.game.add_player() #will be first player at this point
 		self.game.ball = 1
-
 		self.start_ball()
 		self.game.utilities.updateBaseDisplay()
 
 		#self.game.sound.play('game_start')
 
-
-		print "Game Started"
 		
 	def start_ball(self):
-		self.game.utilities.log('Start Ball','info')
+		self.log.info("Calling: BaseGameMode.start_ball")
 
 		#### Update Audits ####
 		self.game.game_data['Audits']['Balls Played'] += 1
@@ -123,10 +125,13 @@ class BaseGameMode(game.Mode):
 		#print "Ball Started"
 
 	def finish_ball(self):
+
+		self.log.info("Calling: BaseGameMode.finish_ball")
+		self.game.utilities.displayText(102,'FINISH','BALL',seconds=.5,justify='center')
 		# Remove Drops mode because of delay issue #
 		self.game.modes.remove(self.game.drops_mode)
 
-		self.game.modes.add(self.game.bonus_mode)
+		#self.game.modes.add(self.game.bonus_mode)
 		
 		if self.game.tiltStatus == 0:
 			self.game.bonus_mode.calculate(self.game.base_mode.finish_ball)
@@ -151,12 +156,18 @@ class BaseGameMode(game.Mode):
 			#if self.game.switches.rightEyeBall.is_closed() == True:
 					#self.game.Coils.('Dummy')
 			self.game.utilities.releaseStuckBalls()
+			if self.game.utilities.troughIsFull():
+				self.game.utilities.displayText(102,'TF','TRUE',seconds=1,justify='center')
+			else:
+				self.game.utilities.displayText(102,'TF','FALSE',seconds=1,justify='center')
+				
 
 
 			self.delay(delay=6,handler=self.end_ball)
 
 		
 	def end_ball(self):
+		self.log.info("Calling: BaseGameMode.end_ball")
 		#Remove Bonus
 		self.game.modes.remove(self.game.bonus_mode)
 		
@@ -172,6 +183,7 @@ class BaseGameMode(game.Mode):
 		#save game audit data
 		self.game.save_game_data()
 
+		self.game.utilities.log("Balls In Play " + str(self.game.trough.num_balls_in_play) + " Called",'info')
 		self.game.utilities.log("End of Ball " + str(self.game.ball) + " Called",'info')
 		self.game.utilities.log("Total Players: " + str(len(self.game.players)),'info')
 		self.game.utilities.log("Current Player: " + str(self.game.current_player_index),'info')
@@ -210,10 +222,11 @@ class BaseGameMode(game.Mode):
 	def finish_game(self):
 		#self.game.modes.add(self.game.highscore_mode)
 		#self.game.highscore_mode.checkScores(self.game.base_mode.end_game)
+		self.log.info("Calling: BaseGameMode.finish_game")		
 		self.end_game()
 
 	def end_game(self):
-		self.game.utilities.log('Game Ended','info')
+		self.log.info("Calling: BaseGameMode.end_game")
 
 		self.game.modes.remove(self.game.highscore_mode)
 
@@ -239,6 +252,7 @@ class BaseGameMode(game.Mode):
 		self.game.reset()
 
 	def loadBallModes(self):
+		self.log.info("Calling: BaseGameMode.loadBallModes")
 		self.game.modes.add(self.game.skillshot_mode)
 		#self.game.modes.add(self.game.bonus_mode)
 		#self.game.modes.add(self.game.chest_mode) #not starting it on ball load for now.
@@ -254,7 +268,8 @@ class BaseGameMode(game.Mode):
 		#self.game.modes.add(self.game.shelter_mode)
 		
 	def unloadBallModes(self):
-		self.game.modes.remove(self.game.bonus_mode)
+		self.log.info("Calling: BaseGameMode.unloadBallModes")
+		#self.game.modes.remove(self.game.bonus_mode)
 		self.game.modes.remove(self.game.skillshot_mode)
 		self.game.modes.remove(self.game.chest_mode)
 		self.game.modes.remove(self.game.vortex_mode)
@@ -282,6 +297,7 @@ class BaseGameMode(game.Mode):
 		self.game.modes.remove(self.game.mode_9)
 
 	def ejectSingle1(self):
+		self.log.info("Calling: BaseGameMode.ejectSingle1")
 		self.game.utilities.acFlashPulse('singleEjectHole_LeftInsertBDFlasher')
 		self.delay(delay=.2,handler=self.game.utilities.acFlashPulse,param='singleEjectHole_LeftInsertBDFlasher')
 		self.delay(delay=.4,handler=self.game.utilities.acCoilPulse,param='singleEjectHole_LeftInsertBDFlasher')
@@ -289,6 +305,7 @@ class BaseGameMode(game.Mode):
 
 	# extra method for adding bonus to make it shorter when used
 	def add_bonus(self,bonusname,points):
+		self.log.info("Calling: BaseGameMode.add_bonus")
 		mybonus = self.game.utilities.get_player_stats(bonusname)
 		self.game.utilities.set_player_stats(bonusname,mybonus + points)
 		self.game.utilities.displayText(100,'ENERGY',str(mybonus + points),seconds=.5,justify='center')
@@ -305,7 +322,7 @@ class BaseGameMode(game.Mode):
 		#########################
 		#Force Stop Game
 		#########################
-		self.game.utilities.log('Force Stop Game','warning')
+		self.log.info("Calling: BaseGameMode.sw_startButton_active_for_1000ms Force Stop Game")
 
 		#### Remove Ball Modes ####
 		self.unloadBallModes()
@@ -316,8 +333,10 @@ class BaseGameMode(game.Mode):
 		self.end_game()
 		
 	def sw_startButton_active_for_20ms(self, sw):
-		print 'Player: ' + str(self.game.players.index)
-		print 'Ball' + str(self.game.ball)
+		self.log.info("Calling: BaseGameMode.sw_startButton_active_for_20ms New Game")
+		self.log.info('Ball' + str(self.game.ball))
+
+		self.log.info('Flicker GI')
 		#Flash GI - Not using schedule
 		self.flashDelay = .1 #used for the delay between GI flashes
 		self.flashDelayGap = .1
@@ -334,15 +353,18 @@ class BaseGameMode(game.Mode):
 				#########################
 				#Start New Game
 				#########################
+				self.log.info('Start New Game')
 				self.start_game()
 			else:
 				#missing balls
+				self.log.info('missing balls')
 				self.game.utilities.releaseStuckBalls()
-				#self.game.alpha_score_display.set_text("MISSING PINBALLS",0)
-				#self.game.alpha_score_display.set_text("PLEASE WAIT",1)
+				self.game.alpha_score_display.set_text("MISSING PINBALLS",0)
+				self.game.alpha_score_display.set_text("PLEASE WAIT",1)
 		elif self.game.ball == 1 and len(self.game.players) < 4:
 			self.game.add_player()
-			print 'Player Added - Total Players = ' + str(len(self.game.players))
+			self.log.info('Player: ' + str(self.game.players.index) +' of ' +str(self.game.players.length))
+			self.log.info('Player Added - Total Players = ' + str(len(self.game.players)))			
 			if (len(self.game.players) == 2):
 				self.game.sound.play_voice('player_2_vox')
 				self.game.utilities.displayText(200,topText='PLAYER 2',bottomText='ADDED',seconds=1,justify='center')
@@ -353,20 +375,33 @@ class BaseGameMode(game.Mode):
 				self.game.sound.play_voice('player_4_vox')
 				self.game.utilities.displayText(200,topText='PLAYER 4',bottomText='ADDED',seconds=1,justify='center')
 		else:
-			pass		
+			pass
+		self.log.info("Ready to Play!")
 		return procgame.game.SwitchStop
 
-	def sw_startButton_active_for_1s(self, sw):
-		#will put launcher in here eventually
-		pass
+
 		
-	def sw_outhole_closed_for_1s(self, sw):
-		### Ball handling ###
-		if self.game.trough.num_balls_in_play == 1: #Last ball in play
-			self.game.utilities.setBallInPlay(False) # Will need to use the trough mode for this
-			#self.game.utilities.acCoilPulse('outholeKicker_Knocker')
-			self.delay('finishBall',delay=1,handler=self.finish_ball)
-		return procgame.game.SwitchStop
+	#def sw_outhole_closed_for_1s(self, sw):
+		#### Ball handling ###
+		#self.game.utilities.displayText(102,'OHCL','1000',seconds=1,justify='center')
+		#if self.game.trough.num_balls_in_play == 1: #Last ball in play
+			#self.game.utilities.setBallInPlay(False) # Will need to use the trough mode for this
+			#self.game.trough.num_balls_in_play = 0
+			##self.game.utilities.acCoilPulse('outholeKicker_Knocker')
+			#self.delay('finishBall',delay=1,handler=self.finish_ball)
+		#return procgame.game.SwitchStop
+
+	#def sw_outhole_closed_for_100ms(self, sw):
+		#self.log.info("Calling: sw_outhole_closed_for_100ms  -- Ball Drained")
+		#self.log.info('balls_in_play: ' +str(self.game.trough.num_balls_in_play))
+		#self.game.utilities.acCoilPulse('outholeKicker_Knocker')
+		#### Ball handling ###
+		#if self.game.trough.num_balls_in_play == 1: #Last ball in play
+			#self.game.utilities.setBallInPlay(False) # Will need to use the trough mode for this
+			#self.game.trough.num_balls_in_play = 0
+			#self.delay('finishBall',delay=1,handler=self.finish_ball)
+		#return procgame.game.SwitchStop
+
 
 	def sw_singleEject_closed_for_200ms(self, sw):
 		self.ejectSingle1()

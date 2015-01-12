@@ -135,8 +135,11 @@ class Trough(procgame.game.Mode):
 
 		self.debug()
 
+	#def mode_tick(self):
+		#self.debug()
+
 	def debug(self):
-		self.log.info("Play "+str(self.num_balls_in_play) + ", locked " + str(self.num_balls_locked)+ ", trough " + str(self.num_balls())+", player locks "+str(self.game.utilities.get_player_stats('balls_locked')))
+		self.log.info("B-IN-PLY"+str(self.num_balls_in_play) + ", B-LCKD" + str(self.num_balls_locked)+ ", TRO" + str(self.num_balls())+", player locks "+str(self.game.utilities.get_player_stats('balls_locked')))
 		self.delay(name='launch', event_type=None, delay=1.0, handler=self.debug)
 
 	def state_str(self):
@@ -158,8 +161,17 @@ class Trough(procgame.game.Mode):
 	def outhole_switch_handler(self,sw):
 		self.log.info('Outhole switch handler')
 
+		self.log.info("Balls in play before pulse = "+str(self.num_balls_in_play))
+		self.log.info("Balls in trough before pulse = "+str(self.num_balls()))			
+
                 # Kick the ball into the trough
 		self.game.utilities.acCoilPulse('outholeKicker_Knocker')
+		if self.num_balls_in_play > 0:
+			self.num_balls_in_play -= 1
+
+		self.log.info("Balls in play before pulse = "+str(self.num_balls_in_play))
+		self.log.info("Balls in trough before pulse = "+str(self.num_balls()))			
+
 
                 # Schedule a call for one second from now to let things settle
                 self.delay('outhole_recheck',delay=1.5,handler=self.outhole_recheck)
@@ -295,6 +307,7 @@ class Trough(procgame.game.Mode):
                 if self.game.switches[switch].is_active():
                     lock_count += 1
             self.num_balls_locked = lock_count
+
 	def is_full(self):
 		return self.num_balls() == self.game.num_balls_total
 
@@ -302,6 +315,8 @@ class Trough(procgame.game.Mode):
 	# being launched.  Make sure to keep a separate count for stealth launches
 	# that should not increase num_balls_in_play.
 	def launch_balls(self, num, callback=None, stealth=False):
+
+		self.log.info('Calling: launch_balls,' +str(num))
 		"""Launches balls into play.
 
 			'num': Number of balls to be launched.  
@@ -321,8 +336,8 @@ class Trough(procgame.game.Mode):
 		#self.num_balls_to_launch = num
 		self.num_balls_to_launch += num
                 #self.autolaunch = autolaunch
-		if stealth:
-			self.num_balls_to_stealth_launch += num
+		#if stealth:
+			#self.num_balls_to_stealth_launch += num
 		if not self.launch_in_progress:
 			self.launch_in_progress = True
 			if callback:
@@ -332,11 +347,23 @@ class Trough(procgame.game.Mode):
 	# This is the part of the ball launch code that repeats for multiple launches.
 	def common_launch_code(self):
 		# Only kick out another ball if the last ball is gone from the 
-		# shooter lane.	
+		# shooter lane.
+		self.log.info('Calling: common_launch_code')
+		
 		if self.game.switches[self.shooter_lane_switchname].is_inactive():
-			self.num_balls_to_launch -= 1
+			self.log.info('common_launch_code says... shooter is clear')
+
+			self.log.info("Balls in play before pulse = "+str(self.num_balls_in_play))
+			self.log.info("Balls in trough before pulse = "+str(self.num_balls()))			
+
 			#pulse coil
 			self.game.utilities.acCoilPulse(coilname='feedShooter_UpperPFFLash',pulsetime=100)
+			self.num_balls_to_launch -= 1
+			self.num_balls_in_play += 1
+			
+			self.log.info("Balls in play after pulse = "+str(self.num_balls_in_play))
+			self.log.info("Balls in trough after pulse = "+str(self.num_balls()))			
+			
 
                         #If the ball in the shooter lane is an extra ball which a player has been awarded
                         #then decrement the number of extra balls available and flag the situation so the lamp
@@ -349,12 +376,12 @@ class Trough(procgame.game.Mode):
                             
                         self.update_lamps()
 
-			# Only increment num_balls_in_play if there are no more 
-			# stealth launches to complete.
-			if self.num_balls_to_stealth_launch > 0:
-				self.num_balls_to_stealth_launch -= 1
-			else:
-				self.num_balls_in_play += 1
+			## Only increment num_balls_in_play if there are no more 
+			## stealth launches to complete.
+			#if self.num_balls_to_stealth_launch > 0:
+				#self.num_balls_to_stealth_launch -= 1
+			#else:
+				#self.num_balls_in_play += 1
 			# If more balls need to be launched, delay 1 second 
 			if self.num_balls_to_launch > 0:
 				self.delay(name='launch', event_type=None, delay=1.0, handler=self.common_launch_code)

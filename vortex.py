@@ -118,10 +118,10 @@ class VortexMode(game.Mode):
 	## Switch Handling Modes ##
 	###########################
 
-	def sw_outhole_closed_for_1s(self, sw):
-		#### Remove Skillshot Mode ####
-		self.game.modes.remove(self)
-		return procgame.game.SwitchContinue
+	#def sw_outhole_closed_for_1s(self, sw):
+		##### Remove Skillshot Mode ####
+		#self.game.modes.remove(self)
+		#return procgame.game.SwitchContinue
 
 	def sw_vortex5k_active(self, sw):
 		self.vortexMade(5000)

@@ -70,7 +70,7 @@ class UtilitiesMode(game.Mode):
 	#### Ball Location Functions ####
 	#################################
 	def troughIsFull(self): #should be moved globally
-		if (self.game.switches.trough1.is_active()==True and self.game.switches.trough2.is_active()==True and self.game.switches.trough3.is_active()==True):
+		if (self.game.switches.trough1.is_active()==True and self.game.switches.trough2.is_active()==True and self.game.switches.trough3.is_active()==True and self.game.switches.trough4.is_active()==True):
 			return True
 		else:
 			return False

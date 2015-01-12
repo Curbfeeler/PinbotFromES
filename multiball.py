@@ -186,8 +186,9 @@ class Multiball(game.Mode):
 	def stopMultiball(self):
 		self.game.utilities.set_player_stats('multiball_running',False)
 		#self.game.utilities.set_player_stats('jackpot_lit',False)
-		self.game.sound.stop_music()
-		self.game.sound.play_music('main'+ str(self.game.ball),loops=-1,music_volume=.5)
+		self.game.utilities.setBallInPlay(True)
+		#self.game.sound.stop_music()
+		#self.game.sound.play_music('main'+ str(self.game.ball),loops=1,music_volume=.5)
 		self.resetMultiballStats()
 		#self.game.bonusmultiplier_mode.incrementBonusMultiplier()
 		self.game.update_lamps()
