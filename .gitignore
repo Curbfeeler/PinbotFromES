@@ -1,9 +1,6 @@
 /assets/*
-/procgame/*
-/gamedesign/*
+procgame/*
 /config/game_data.yaml
-/lamps/LampshowTimeCalculator.xlsx
-/lamps/fix.bat
 wingdbstub.py
 wingdebugpw
 *.zip

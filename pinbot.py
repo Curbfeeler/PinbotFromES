@@ -43,8 +43,8 @@ from time import strftime
 ###################################
 from base import *
 from attract import *
-import scoredisplay
-from scoredisplay import AlphaScoreDisplay #test and see about converting this to *
+import scoredisplay.scoredisplay
+from scoredisplay.scoredisplay import AlphaScoreDisplay #test and see about converting this to *
 from chest import *
 from skillshot import *
 from utilities import *

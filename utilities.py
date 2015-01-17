@@ -86,11 +86,11 @@ class UtilitiesMode(game.Mode):
 		if self.game.switches.singleEject.is_active()==True:
 			self.game.utilities.acCoilPulse(coilname='singleEjectHole_LeftInsertBDFlasher',pulsetime=50)
 		
-		while True:
-			logging.info("pulsing visor motor now...")
-			self.game.coils.visorMotor.enable()	
-			if self.game.switches.visorClosed.state == False:
-				break		
+		#while True:
+			#logging.info("pulsing visor motor now...")
+			#self.game.coils.visorMotor.enable()	
+			#if self.game.switches.visorClosed.state == False:
+				#break		
 
 	def launch_ball(self):
 		if self.game.switches.ballShooter.is_active()==True:
