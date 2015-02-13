@@ -155,8 +155,8 @@ class UtilitiesMode(game.Mode):
 		# This function will be used as a very basic display prioritizing helper
 		# Check if anything with a higher priority is running
 		#if (priority >= self.currentDisplayPriority):
-		self.game.alpha_score_display.set_text(topText,0,justify,seconds=seconds)
-		self.game.alpha_score_display.set_text(bottomText,1,justify,seconds=seconds)
+		self.game.score_display.set_text(topText,0,justify,seconds=seconds)
+		self.game.score_display.set_text(bottomText,1,justify,seconds=seconds)
 		self.delay(name=None,event_type=None,delay=seconds,handler=self.dummyMethod)
 		#pinproc.aux_command_delay(seconds*1000)
 		pass
@@ -168,28 +168,50 @@ class UtilitiesMode(game.Mode):
 	###########################
 	#### Display Functions ####
 	###########################
-	def displayText(self,priority,topText=' ',bottomText=' ',seconds=2,justify='left',topBlinkRate=0,bottomBlinkRate=0):
+	def displayText(self,priority,topLeft7=' ', topRight7=' ',bottomLeft7=' ',bottomRight7=' ',seconds=2,justify='left',topBlinkRate=0,bottomBlinkRate=0):
 		# This function will be used as a very basic display prioritizing helper
 		# Check if anything with a higher priority is running
 		if (priority >= self.currentDisplayPriority):
 			self.cancel_delayed('resetDisplayPriority')
-			self.game.alpha_score_display.cancel_script()
-			self.game.alpha_score_display.set_text(topText,0,justify,seconds=seconds)
-			self.game.alpha_score_display.set_text(bottomText,1,justify,seconds=seconds)
+			self.game.score_display.cancel_script()
+			while len(topLeft7)<7:
+				if len(topLeft7)%2==0:
+					topLeft7+=' '
+				else:
+					topLeft7 = ' ' + topLeft7
+			while len(topRight7)<7:
+				if len(topRight7)%2==0:
+					topRight7+=' '
+				else:
+					topRight7 = ' ' + topRight7
+			topText = '0' +topLeft7 +str(self.game.current_player_index+1) +topRight7
+			self.game.score_display.set_text(topText,0,justify,seconds=seconds)
+			bottomLeft7 = str(bottomLeft7)
+			bottomRight7 = str(bottomRight7)
+
+			while len(bottomLeft7)<7:
+				bottomLeft7+=' '
+			while len(bottomRight7)<7:
+				bottomRight7+=' '
+			bottomText = str(self.game.ball) +bottomLeft7 +'0' +bottomRight7
+			self.game.score_display.set_text(bottomText,1,justify,seconds=seconds)
 			self.delay(name='resetDisplayPriority',event_type=None,delay=seconds,handler=self.resetDisplayPriority)
 			self.currentDisplayPriority = priority
 
 	def resetDisplayPriority(self):
 		self.currentDisplayPriority = 0
-		self.updateBaseDisplay()
+		#self.updateBaseDisplay()
 
 	def updateBaseDisplay(self):
 		logging.info("Update Base Display Called")
 		if (self.currentDisplayPriority == 0 and self.game.tiltStatus == 0 and self.game.ball <> 0):
 			self.p = self.game.current_player()
-			self.game.alpha_score_display.cancel_script()
-			self.game.alpha_score_display.set_text(locale.format("%d", self.p.score, grouping=True),0,justify='left')
-			self.game.alpha_score_display.set_text(self.p.name.upper() + "  BALL "+str(self.game.ball),1,justify='right')
+			self.game.score_display.cancel_script()
+			
+			topText = '0' +'PLAYER ' +str(self.game.current_player_index+1) +'      ' +str(self.game.current_player_index+1)
+			self.game.score_display.set_text(topText,0,justify='left')
+			bottomText = locale.format("%d", self.p.score, grouping=True)
+			self.game.score_display.set_text(bottomText,1,justify='left')
 			logging.info(self.p.name)
 			logging.info("Ball " + str(self.game.ball))
 	
@@ -256,6 +278,15 @@ class UtilitiesMode(game.Mode):
 
 	def shakerPulseHigh(self):
 		self.game.coils.quakeMotor.pulse(255)
+
+	######################
+	#### Arduino call ####
+	######################
+	#def write_arduino(self,servalue):
+		#''self.ser.write(servalue)
+
+	#def arduino_write_number(self,number):
+		#self.write_arduino(number)
 
 	###############################
 	#### Backbox LED Functions ####

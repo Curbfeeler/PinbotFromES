@@ -92,7 +92,7 @@ class Tilt(game.Mode):
 
 		#Update Display
 		time=2
-		self.game.utilities.displayText(200,topText='WARNING '+str(self.game.times_warned)+'/'+str(self.game.tiltWarnings),bottomText=' ',seconds=time,justify='center',topBlinkRate=1)
+		self.game.utilities.displayText(200,'WARNING',str(self.game.times_warned)+'/'+str(self.game.tiltWarnings),'','',seconds=time,justify='center',topBlinkRate=1)
 
 	def tilt(self):
 		#check if already in a tilt state
@@ -110,7 +110,7 @@ class Tilt(game.Mode):
 			## will not allow other messages with lower priority to be displayed ##
 			## until the start of a new ball when the tilt status resets.        ##
 			#######################################################################
-			self.game.utilities.displayText(200,topText='TILT',bottomText=' ',seconds=1,justify='center')
+			self.game.utilities.displayText(200,'TILT','TILT','TILT','TILT',seconds=1,justify='center')
 
 			#### Disable Bumpers ####
 			self.game.coils.flipperEnable.disable()
@@ -148,7 +148,7 @@ class Tilt(game.Mode):
 			self.game.utilities.releaseStuckBalls()
 			self.delay(name='waitForTrough',delay=2,handler=self.waitUntilTroughIsFull)
 		else:
-			self.game.utilities.displayText(200,topText='TILT',bottomText=' ',seconds=1,justify='center')
+			self.game.utilities.displayText(200,'TILT','TILT','TILT','TILT',seconds=1,justify='center')
 
 	def resetWarningBuffer(self):
 		self.game.allowWarnings = True

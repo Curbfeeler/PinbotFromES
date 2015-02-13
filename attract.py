@@ -83,7 +83,7 @@ class AttractMode(game.Mode):
 		self.game.lampctrlflash.stop_show()
 
 		#### Cancel Display Script ####
-		self.game.alpha_score_display.cancel_script()
+		self.game.score_display.cancel_script()
 
 		#### Enable AC Relay for Flashers ####
 		#### This is only needed for using lampshows that contain flashers on the AC Relay ####
@@ -106,15 +106,27 @@ class AttractMode(game.Mode):
 		#### Script List Variable Initialization ####
 		script=[]
 	
-		self.attractTest = True
+		self.attractTest = False
 
 		if(self.attractTest == True):
-			script.append({'top':'SSSSSSS12BBBBBBB','bottom':'6666666347777777','timer':2,'transition':0})
-			script.append({'top':'  BALL 00 SAVED ','bottom':'5555554466666666','timer':8,'transition':1})
-			script.append({'top':'  TEST 99 TEXT  ','bottom':'8888883312345678','timer':2,'transition':2})
+			
+			
+			#self.game.alpha_display.set_text("MISSING PINBALLS",0)
+			#self.game.score_display.set_text("  BALL 00 SAVED ",0)
+			#self.game.score_display.set_text("SSSSSSS12BBBBBBB",1)
+			#self.delay(name='lampshows',delay=2,handler=None)
+			
+			#2BCDEFGH    2JKLMNOP
+			#01234567       01234567			
+		
+
+			script.append({'top':'2BCDEFGH2JKLMNOP','bottom':'0123456701234567','timer':2,'transition':0})
+			script.append({'top':'2BCDEFGH2JKLMNOP','bottom':'0123456701234567','timer':2,'transition':0})
+			script.append({'top':'2BCDEFGH2JKLMNOP','bottom':'0123456701234567','timer':2,'transition':0})
+
 			##Cancel any score display scripts that may be running
-			self.game.alpha_score_display.cancel_script()
-			self.game.alpha_score_display.set_script(script)
+			self.game.score_display.cancel_script()
+			self.game.score_display.set_script(script)
 			return
 		else:
 
@@ -346,8 +358,8 @@ class AttractMode(game.Mode):
 			#### Start New Display Script
 			#############################
 			#Cancel any score display scripts that may be running
-			self.game.alpha_score_display.cancel_script()
-			self.game.alpha_score_display.set_script(script)
+			self.game.score_display.cancel_script()
+			self.game.score_display.set_script(script)
 		pass
 		
 	def startAttractLamps(self):
@@ -445,17 +457,17 @@ class AttractMode(game.Mode):
 		#self.game.coils.quakeInstitute.disable()
 		#return procgame.game.SwitchStop
 
-	def sw_outhole_closed(self, sw):
-		#This will eventually be moved to the Trough mode
-		return procgame.game.SwitchStop
+	#def sw_outhole_closed(self, sw):
+		##This will eventually be moved to the Trough mode
+		#return procgame.game.SwitchStop
 
-	def sw_outhole_active_for_1s(self, sw):
-		#This will eventually be moved to the Trough mode
-		#self.game.coils.flipperEnable.disable()
-		#self.game.utilities.acCoilPulse('outholeKicker_Knocker')
-		#self.game.alpha_score_display.set_text("GAME OVER",0)
-		#self.game.alpha_score_display.set_text("PRESS START",1)
-		return procgame.game.SwitchStop
+	#def sw_outhole_active_for_1s(self, sw):
+		##This will eventually be moved to the Trough mode
+		##self.game.coils.flipperEnable.disable()
+		##self.game.utilities.acCoilPulse('outholeKicker_Knocker')
+		##self.game.score_display.set_text("GAME OVER",0)
+		##self.game.score_display.set_text("PRESS START",1)
+		#return procgame.game.SwitchStop
 	
 	#######################################################################
 	#### Jet, Sling and Skillshot Switch Handling #########################

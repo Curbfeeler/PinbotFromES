@@ -26,8 +26,6 @@
 import procgame.game
 from procgame import *
 import pinproc
-#import scoredisplay
-#from scoredisplay import AlphaScoreDisplay
 import locale
 import time
 
@@ -51,7 +49,8 @@ class SkillshotMode(game.Mode):
 		self.game.utilities.set_player_stats('skillshot_active',True)
 		self.update_lamps()
 #                                                   0                * 0                *
-		self.game.utilities.displayText(80,'CHASER FOR SKILL','OR SHOOT VORTEX',seconds=6,justify='center')
+                                                  #topLeft7='XXXXXXX', topRight7='XXXXXXX',bottomLeft7='8888888',bottomRight7='8888888'
+		self.game.utilities.displayText(80,topLeft7='CHASER',topRight7='FOR',bottomLeft7='SKILL',bottomRight7='SHOT',seconds=6,justify='center')
 		return super(SkillshotMode, self).mode_started()
 
 	def mode_stopped(self):
@@ -61,80 +60,79 @@ class SkillshotMode(game.Mode):
 		return super(SkillshotMode, self).mode_stopped()
 
 	def update_lamps(self):
-		print "Update Lamps: Skillshot"
+		#print "Update Lamps: Skillshot"
 		if (self.game.utilities.get_player_stats('skillshot_active') == True):
 			self.startSkillshotLamps()
 		else:
 			self.stopSkillshotLamps()
 
-	#def mode_tick(self):
-		##strMyTime = str(int(round(time.time())))
-		#iMySeconds = int(str(int(round(time.time())))[-1:]) # last digit		
-		#if(self.ActiveSkillShotIndex != iMySeconds):
-			#self.ActiveSkillShotIndex = iMySeconds
-			#if self.ActiveSkillShotIndex == 1:
-				#self.game.lamps.chestMatrix11.schedule(schedule=0xCCC00000, cycle_seconds=1, now=False)
-				#self.game.lamps.chestMatrix21.schedule(schedule=0xCCC00000, cycle_seconds=1, now=False)
-				#self.game.lamps.chestMatrix31.schedule(schedule=0xCCC00000, cycle_seconds=1, now=False)
-				#self.game.lamps.chestMatrix41.schedule(schedule=0xCCC00000, cycle_seconds=1, now=False)
-				#self.game.lamps.chestMatrix51.schedule(schedule=0xCCC00000, cycle_seconds=1, now=False)
-			#elif self.ActiveSkillShotIndex == 2:
-				#self.game.lamps.chestMatrix12.schedule(schedule=0xCCC00000, cycle_seconds=1, now=False)
-				#self.game.lamps.chestMatrix22.schedule(schedule=0xCCC00000, cycle_seconds=1, now=False)
-				#self.game.lamps.chestMatrix32.schedule(schedule=0xCCC00000, cycle_seconds=1, now=False)
-				#self.game.lamps.chestMatrix42.schedule(schedule=0xCCC00000, cycle_seconds=1, now=False)
-				#self.game.lamps.chestMatrix52.schedule(schedule=0xCCC00000, cycle_seconds=1, now=False)
-			#elif self.ActiveSkillShotIndex == 3:
-				#self.game.lamps.chestMatrix13.schedule(schedule=0xCCC00000, cycle_seconds=1, now=False)
-				#self.game.lamps.chestMatrix23.schedule(schedule=0xCCC00000, cycle_seconds=1, now=False)
-				#self.game.lamps.chestMatrix33.schedule(schedule=0xCCC00000, cycle_seconds=1, now=False)
-				#self.game.lamps.chestMatrix43.schedule(schedule=0xCCC00000, cycle_seconds=1, now=False)
-				#self.game.lamps.chestMatrix53.schedule(schedule=0xCCC00000, cycle_seconds=1, now=False)
-			#elif  self.ActiveSkillShotIndex == 4:
-				#self.game.lamps.chestMatrix14.schedule(schedule=0xCCC00000, cycle_seconds=1, now=False)
-				#self.game.lamps.chestMatrix24.schedule(schedule=0xCCC00000, cycle_seconds=1, now=False)
-				#self.game.lamps.chestMatrix34.schedule(schedule=0xCCC00000, cycle_seconds=1, now=False)
-				#self.game.lamps.chestMatrix44.schedule(schedule=0xCCC00000, cycle_seconds=1, now=False)
-				#self.game.lamps.chestMatrix54.schedule(schedule=0xCCC00000, cycle_seconds=1, now=False)
-			#elif  self.ActiveSkillShotIndex == 5:
-				#self.game.lamps.chestMatrix15.schedule(schedule=0xCCC00000, cycle_seconds=1, now=False)
-				#self.game.lamps.chestMatrix25.schedule(schedule=0xCCC00000, cycle_seconds=1, now=False)
-				#self.game.lamps.chestMatrix35.schedule(schedule=0xCCC00000, cycle_seconds=1, now=False)
-				#self.game.lamps.chestMatrix45.schedule(schedule=0xCCC00000, cycle_seconds=1, now=False)
-				#self.game.lamps.chestMatrix55.schedule(schedule=0xCCC00000, cycle_seconds=1, now=False)
-			#elif self.ActiveSkillShotIndex == 6:
-				#self.game.lamps.chestMatrix11.schedule(schedule=0xCCC00000, cycle_seconds=1, now=False)
-				#self.game.lamps.chestMatrix12.schedule(schedule=0xCCC00000, cycle_seconds=1, now=False)
-				#self.game.lamps.chestMatrix13.schedule(schedule=0xCCC00000, cycle_seconds=1, now=False)
-				#self.game.lamps.chestMatrix14.schedule(schedule=0xCCC00000, cycle_seconds=1, now=False)
-				#self.game.lamps.chestMatrix15.schedule(schedule=0xCCC00000, cycle_seconds=1, now=False)
-			#elif self.ActiveSkillShotIndex == 7:
-				#self.game.lamps.chestMatrix21.schedule(schedule=0xCCC00000, cycle_seconds=1, now=False)
-				#self.game.lamps.chestMatrix22.schedule(schedule=0xCCC00000, cycle_seconds=1, now=False)
-				#self.game.lamps.chestMatrix23.schedule(schedule=0xCCC00000, cycle_seconds=1, now=False)
-				#self.game.lamps.chestMatrix24.schedule(schedule=0xCCC00000, cycle_seconds=1, now=False)
-				#self.game.lamps.chestMatrix25.schedule(schedule=0xCCC00000, cycle_seconds=1, now=False)
-			#elif  self.ActiveSkillShotIndex == 8:
-				#self.game.lamps.chestMatrix31.schedule(schedule=0xCCC00000, cycle_seconds=1, now=False)
-				#self.game.lamps.chestMatrix32.schedule(schedule=0xCCC00000, cycle_seconds=1, now=False)
-				#self.game.lamps.chestMatrix33.schedule(schedule=0xCCC00000, cycle_seconds=1, now=False)
-				#self.game.lamps.chestMatrix34.schedule(schedule=0xCCC00000, cycle_seconds=1, now=False)
-				#self.game.lamps.chestMatrix35.schedule(schedule=0xCCC00000, cycle_seconds=1, now=False)
-			#elif self.ActiveSkillShotIndex == 9:
-				#self.game.lamps.chestMatrix41.schedule(schedule=0xCCC00000, cycle_seconds=1, now=False)
-				#self.game.lamps.chestMatrix42.schedule(schedule=0xCCC00000, cycle_seconds=1, now=False)
-				#self.game.lamps.chestMatrix43.schedule(schedule=0xCCC00000, cycle_seconds=1, now=False)
-				#self.game.lamps.chestMatrix44.schedule(schedule=0xCCC00000, cycle_seconds=1, now=False)
-				#self.game.lamps.chestMatrix45.schedule(schedule=0xCCC00000, cycle_seconds=1, now=False)
-			#elif self.ActiveSkillShotIndex == 0:
-				#self.game.lamps.chestMatrix51.schedule(schedule=0xCCC00000, cycle_seconds=1, now=False)
-				#self.game.lamps.chestMatrix52.schedule(schedule=0xCCC00000, cycle_seconds=1, now=False)
-				#self.game.lamps.chestMatrix53.schedule(schedule=0xCCC00000, cycle_seconds=1, now=False)
-				#self.game.lamps.chestMatrix54.schedule(schedule=0xCCC00000, cycle_seconds=1, now=False)
-				#self.game.lamps.chestMatrix55.schedule(schedule=0xCCC00000, cycle_seconds=1, now=False)
-		#else:
-			#pass
-			##self.game.utilities.log("self.ActiveSkillShotIndex: " + str(self.ActiveSkillShotIndex) +"- iMySeconds: " +str(iMySeconds) ,'info')
+	def mode_tick(self):
+		iMySeconds = int(str(int(round(time.time())))[-1:]) # last digit		
+		if(self.ActiveSkillShotIndex != iMySeconds):
+			self.ActiveSkillShotIndex = iMySeconds
+			if self.ActiveSkillShotIndex == 1:
+				self.game.lamps.chestMatrix11.schedule(schedule=0xCCC00000, cycle_seconds=1, now=False)
+				self.game.lamps.chestMatrix21.schedule(schedule=0xCCC00000, cycle_seconds=1, now=False)
+				self.game.lamps.chestMatrix31.schedule(schedule=0xCCC00000, cycle_seconds=1, now=False)
+				self.game.lamps.chestMatrix41.schedule(schedule=0xCCC00000, cycle_seconds=1, now=False)
+				self.game.lamps.chestMatrix51.schedule(schedule=0xCCC00000, cycle_seconds=1, now=False)
+			elif self.ActiveSkillShotIndex == 2:
+				self.game.lamps.chestMatrix12.schedule(schedule=0xCCC00000, cycle_seconds=1, now=False)
+				self.game.lamps.chestMatrix22.schedule(schedule=0xCCC00000, cycle_seconds=1, now=False)
+				self.game.lamps.chestMatrix32.schedule(schedule=0xCCC00000, cycle_seconds=1, now=False)
+				self.game.lamps.chestMatrix42.schedule(schedule=0xCCC00000, cycle_seconds=1, now=False)
+				self.game.lamps.chestMatrix52.schedule(schedule=0xCCC00000, cycle_seconds=1, now=False)
+			elif self.ActiveSkillShotIndex == 3:
+				self.game.lamps.chestMatrix13.schedule(schedule=0xCCC00000, cycle_seconds=1, now=False)
+				self.game.lamps.chestMatrix23.schedule(schedule=0xCCC00000, cycle_seconds=1, now=False)
+				self.game.lamps.chestMatrix33.schedule(schedule=0xCCC00000, cycle_seconds=1, now=False)
+				self.game.lamps.chestMatrix43.schedule(schedule=0xCCC00000, cycle_seconds=1, now=False)
+				self.game.lamps.chestMatrix53.schedule(schedule=0xCCC00000, cycle_seconds=1, now=False)
+			elif  self.ActiveSkillShotIndex == 4:
+				self.game.lamps.chestMatrix14.schedule(schedule=0xCCC00000, cycle_seconds=1, now=False)
+				self.game.lamps.chestMatrix24.schedule(schedule=0xCCC00000, cycle_seconds=1, now=False)
+				self.game.lamps.chestMatrix34.schedule(schedule=0xCCC00000, cycle_seconds=1, now=False)
+				self.game.lamps.chestMatrix44.schedule(schedule=0xCCC00000, cycle_seconds=1, now=False)
+				self.game.lamps.chestMatrix54.schedule(schedule=0xCCC00000, cycle_seconds=1, now=False)
+			elif  self.ActiveSkillShotIndex == 5:
+				self.game.lamps.chestMatrix15.schedule(schedule=0xCCC00000, cycle_seconds=1, now=False)
+				self.game.lamps.chestMatrix25.schedule(schedule=0xCCC00000, cycle_seconds=1, now=False)
+				self.game.lamps.chestMatrix35.schedule(schedule=0xCCC00000, cycle_seconds=1, now=False)
+				self.game.lamps.chestMatrix45.schedule(schedule=0xCCC00000, cycle_seconds=1, now=False)
+				self.game.lamps.chestMatrix55.schedule(schedule=0xCCC00000, cycle_seconds=1, now=False)
+			elif self.ActiveSkillShotIndex == 6:
+				self.game.lamps.chestMatrix11.schedule(schedule=0xCCC00000, cycle_seconds=1, now=False)
+				self.game.lamps.chestMatrix12.schedule(schedule=0xCCC00000, cycle_seconds=1, now=False)
+				self.game.lamps.chestMatrix13.schedule(schedule=0xCCC00000, cycle_seconds=1, now=False)
+				self.game.lamps.chestMatrix14.schedule(schedule=0xCCC00000, cycle_seconds=1, now=False)
+				self.game.lamps.chestMatrix15.schedule(schedule=0xCCC00000, cycle_seconds=1, now=False)
+			elif self.ActiveSkillShotIndex == 7:
+				self.game.lamps.chestMatrix21.schedule(schedule=0xCCC00000, cycle_seconds=1, now=False)
+				self.game.lamps.chestMatrix22.schedule(schedule=0xCCC00000, cycle_seconds=1, now=False)
+				self.game.lamps.chestMatrix23.schedule(schedule=0xCCC00000, cycle_seconds=1, now=False)
+				self.game.lamps.chestMatrix24.schedule(schedule=0xCCC00000, cycle_seconds=1, now=False)
+				self.game.lamps.chestMatrix25.schedule(schedule=0xCCC00000, cycle_seconds=1, now=False)
+			elif  self.ActiveSkillShotIndex == 8:
+				self.game.lamps.chestMatrix31.schedule(schedule=0xCCC00000, cycle_seconds=1, now=False)
+				self.game.lamps.chestMatrix32.schedule(schedule=0xCCC00000, cycle_seconds=1, now=False)
+				self.game.lamps.chestMatrix33.schedule(schedule=0xCCC00000, cycle_seconds=1, now=False)
+				self.game.lamps.chestMatrix34.schedule(schedule=0xCCC00000, cycle_seconds=1, now=False)
+				self.game.lamps.chestMatrix35.schedule(schedule=0xCCC00000, cycle_seconds=1, now=False)
+			elif self.ActiveSkillShotIndex == 9:
+				self.game.lamps.chestMatrix41.schedule(schedule=0xCCC00000, cycle_seconds=1, now=False)
+				self.game.lamps.chestMatrix42.schedule(schedule=0xCCC00000, cycle_seconds=1, now=False)
+				self.game.lamps.chestMatrix43.schedule(schedule=0xCCC00000, cycle_seconds=1, now=False)
+				self.game.lamps.chestMatrix44.schedule(schedule=0xCCC00000, cycle_seconds=1, now=False)
+				self.game.lamps.chestMatrix45.schedule(schedule=0xCCC00000, cycle_seconds=1, now=False)
+			elif self.ActiveSkillShotIndex == 0:
+				self.game.lamps.chestMatrix51.schedule(schedule=0xCCC00000, cycle_seconds=1, now=False)
+				self.game.lamps.chestMatrix52.schedule(schedule=0xCCC00000, cycle_seconds=1, now=False)
+				self.game.lamps.chestMatrix53.schedule(schedule=0xCCC00000, cycle_seconds=1, now=False)
+				self.game.lamps.chestMatrix54.schedule(schedule=0xCCC00000, cycle_seconds=1, now=False)
+				self.game.lamps.chestMatrix55.schedule(schedule=0xCCC00000, cycle_seconds=1, now=False)
+		else:
+			pass
+			#self.game.utilities.log("self.ActiveSkillShotIndex: " + str(self.ActiveSkillShotIndex) +"- iMySeconds: " +str(iMySeconds) ,'info')
 	
 	def startSkillshotLamps(self):
 		pass
@@ -161,7 +159,7 @@ class SkillshotMode(game.Mode):
 	##############################
 	def superSkillshotMissed(self):
 		self.game.sound.play('skillshotMissed')
-		self.game.utilities.displayText(100,'SKILLSHOT','MISSED',seconds=self.skillshotDisplayTime,justify='center')
+		self.game.utilities.displayText(100,'YOU','SUCK','YOU','MISS',seconds=self.skillshotDisplayTime,justify='center')
 		self.game.utilities.setBallInPlay(True)
 		#self.game.sound.stop_music()
 		#self.game.sound.play_music('main'+ str(self.game.ball),loops=1,music_volume=.5)
@@ -174,8 +172,8 @@ class SkillshotMode(game.Mode):
 		#########################
 		#Alert Snoozing Player
 		#########################
-		self.game.utilities.displayText(101,'HEY',self.game.players[self.game.current_player_index].name.upper(),seconds=2,justify='center')
-		self.game.utilities.displayText(100,'CHASER FOR SKILL','OR SHOOT VORTEX',seconds=3,justify='center')
+		self.game.utilities.displayText(101,'HEY',self.game.players[self.game.current_player_index].name.upper(),'WAKE','UP',seconds=2,justify='center')
+		self.game.utilities.displayText(100,'CHASER', 'FOR', 'SKILL','SHOT',seconds=3,justify='center')
 		self.game.sound.play('wakeUp')
 		self.game.shooter_lane_status = 1
 		return procgame.game.SwitchContinue
@@ -183,7 +181,7 @@ class SkillshotMode(game.Mode):
 	def superSkillshotAwarded(self):
 		self.game.sound.play('skillshotAwarded')
 		self.game.lampctrlflash.play_show('super_skillshot', repeat=False, callback=self.game.update_lamps)
-		self.game.utilities.displayText(100,'SKILLSHOT',locale.format("%d", 200000, grouping=True) + ' POINTS',seconds=self.skillshotDisplayTime,justify='center')
+		self.game.utilities.displayText(100,'SKILL','SHOT',locale.format("%d", 200000, grouping=True), 'POINTS',seconds=self.skillshotDisplayTime,justify='center')
 		self.game.utilities.score(200000)
 		self.game.utilities.set_player_stats('skillshot_x',self.game.utilities.get_player_stats('skillshot_x') + 1)
 		self.game.utilities.setBallInPlay(True)
@@ -195,7 +193,7 @@ class SkillshotMode(game.Mode):
 
 
 	def skillshotMissed(self):
-		self.game.utilities.displayText(100,'SKILLSHOT','MISSED',seconds=self.skillshotDisplayTime,justify='center')
+		self.game.utilities.displayText(100,'SKILL','SHOT','MISSED','',seconds=self.skillshotDisplayTime,justify='center')
 		self.game.sound.play('skillshotMissed')
 		self.game.utilities.setBallInPlay(True)
 		#self.game.sound.stop_music()
@@ -206,7 +204,7 @@ class SkillshotMode(game.Mode):
 
 		
 	def vortexMade(self, iPoints):
-		self.game.utilities.displayText(100,'VORTEX',locale.format("%d", iPoints * self.game.utilities.get_player_stats('skillshot_x'), grouping=True) + ' POINTS',seconds=self.skillshotDisplayTime,justify='center')
+		self.game.utilities.displayText(100,'VORTEX',locale.format("%d", iPoints * self.game.utilities.get_player_stats('skillshot_x'), grouping=True),'POINTS','',seconds=self.skillshotDisplayTime,justify='center')
 		self.game.utilities.score(iPoints)# * self.game.utilities.get_player_stats('skillshot_x'))
 		self.game.lampctrlflash.play_show('skillshot', repeat=False, callback=self.game.update_lamps)
 

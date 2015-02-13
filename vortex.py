@@ -88,13 +88,13 @@ class VortexMode(game.Mode):
 		#Alert Snoozing Player
 		#########################
 		self.game.utilities.displayText(101,'HEY',self.game.players[self.game.current_player_index].name.upper(),seconds=2,justify='center')
-		self.game.utilities.displayText(100,'VORTEX FOR',str(self.game.utilities.get_player_stats('bonus_x')) +'X',seconds=6,justify='center')
+		self.game.utilities.displayText(100,'VORTEX', 'FOR',str(self.game.utilities.get_player_stats('bonus_x')),'X',seconds=6,justify='center')
 		self.game.sound.play('wakeUp')
 		self.game.shooter_lane_status = 1
 		return procgame.game.SwitchContinue
 
 	def vortexMissed(self):
-		self.game.utilities.displayText(100,'VORTEX','MISSED',seconds=self.vortexDisplayTime,justify='center')
+		self.game.utilities.displayText(100,'VORTEX','MISSED','','',seconds=self.vortexDisplayTime,justify='center')
 		self.game.sound.play('skillshotMissed')
 		#self.game.sound.stop_music()
 		#self.game.sound.play_music('main'+ str(self.game.ball),loops=1,music_volume=.5)
@@ -102,7 +102,7 @@ class VortexMode(game.Mode):
 
 		
 	def vortexMade(self, iPoints):
-		self.game.utilities.displayText(100,'VORTEX',locale.format("%d", iPoints * self.game.utilities.get_player_stats('bonus_x'), grouping=True) + ' POINTS',seconds=self.vortexDisplayTime,justify='center')
+		self.game.utilities.displayText(100,'VORTEX',locale.format("%d", iPoints * self.game.utilities.get_player_stats('bonus_x'), grouping=True),' POINTS','',seconds=self.vortexDisplayTime,justify='center')
 		self.game.utilities.score(iPoints * self.game.utilities.get_player_stats('bonus_x'))
 		self.game.lampctrlflash.play_show('skillshot', repeat=False, callback=self.game.update_lamps)
 

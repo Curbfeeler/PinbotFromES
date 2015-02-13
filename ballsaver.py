@@ -90,7 +90,9 @@ class BallSaver(game.Mode):
 		self.game.utilities.acCoilPulse(coilname='feedShooter_UpperPFFLash',pulsetime=100)
 
 	def saveBall(self):
-		self.game.utilities.displayText(199,topText='BALL SAVED',bottomText=' ',seconds=3,justify='center')
+		
+                                                   #topLeft7='XXXXXXX', topRight7='XXXXXXX',bottomLeft7='8888888',bottomRight7='8888888'
+		self.game.utilities.displayText(199,topLeft7='BALL', topRight7='SAVED',bottomLeft7='8888888',bottomRight7='8888888',seconds=3,justify='center')
 
 		#Stop Skillshot
 		self.game.modes.remove(self.game.skillshot_mode)
@@ -107,7 +109,8 @@ class BallSaver(game.Mode):
 		self.stopBallSaverMode()
 
 	def saveBallEarly(self): #Need to work on this...
-		self.game.utilities.displayText(199,topText='BALL SAVED',bottomText=' ',seconds=3,justify='center')
+                                                   #topLeft7='XXXXXXX', topRight7='XXXXXXX',bottomLeft7='8888888',bottomRight7='8888888'
+		self.game.utilities.displayText(199,topLeft7='BALL', topRight7='SAVED',bottomLeft7='8888888',bottomRight7='8888888',seconds=3,justify='center')
 
 		#Stop Skillshot
 		self.game.modes.remove(self.game.skillshot_mode)
@@ -123,23 +126,23 @@ class BallSaver(game.Mode):
 		self.game.trough.launch_balls(num=1)
 		self.stopBallSaverMode()
 
-	def sw_outhole_closed_for_1s(self, sw):
-		if (self.game.utilities.get_player_stats('ballsave_active') == True):
-			self.saveBall()
-			self.game.utilities.log('BALLSAVE - Ouhole closed for 1s - SwitchStop','info')
-			return procgame.game.SwitchStop
-		else:
-			self.game.utilities.log('BALLSAVE - Ouhole closed for 1s - SwitchContinue','info')
-			return procgame.game.SwitchContinue
+	#def sw_outhole_closed_for_1s(self, sw):
+		#if (self.game.utilities.get_player_stats('ballsave_active') == True):
+			#self.game.utilities.log('BALLSAVE - Outhole closed for 1s - SwitchStop','info')
+			#self.saveBall()
+			#return procgame.game.SwitchStop
+		#else:
+			#self.game.utilities.log('BALLSAVE NOT ACTIVE - Outhole closed for 1s - SwitchContinue','info')
+			#return procgame.game.SwitchContinue
 
-	def sw_outhole_closed(self, sw):
-		if (self.game.utilities.get_player_stats('ballsave_active') == True):
-			self.game.utilities.log('BALLSAVE - Ouhole closed - SwitchStop - Disabling timers','info')
-			self.cancel_delayed('ballsaver')
-			return procgame.game.SwitchStop
-		else:
-			self.game.utilities.log('BALLSAVE - Ouhole closed - SwitchContinue','info')
-			return procgame.game.SwitchContinue
+	#def sw_outhole_closed(self, sw):
+		#if (self.game.utilities.get_player_stats('ballsave_active') == True):
+			#self.game.utilities.log('BALLSAVE - Ouhole closed - SwitchStop - Disabling timers','info')
+			#self.cancel_delayed('ballsaver')
+			#return procgame.game.SwitchStop
+		#else:
+			#self.game.utilities.log('BALLSAVE - Ouhole closed - SwitchContinue','info')
+			#return procgame.game.SwitchContinue
 
 	##################################################
 	## Skillshot Switches

@@ -150,13 +150,13 @@ class HighScore(game.Mode):
 
 	def enterInitialsStage1(self,player_num,new_position):
 		self.currentLetter = self.aLetters[1]
-		self.game.utilities.displayText(2000,topText='HIGH SCORE',bottomText='PLAYER ' + str(player_num) + self.currentLetter + '__',seconds=0,justify='center')
+		self.game.utilities.displayText(2000,'HIGH', 'SCORE','PLAYER',(str(player_num) + self.currentLetter + '__'),seconds=0,justify='center')
 
 	def enterInitialsStage2(self,player_num,new_position):
-		self.game.utilities.displayText(2000,topText='HIGH SCORE',bottomText='PLAYER ' + str(player_num) + self.workingInitials + self.currentLetter + '_',seconds=0,justify='center')
+		self.game.utilities.displayText(2000,'HIGH','SCORE','PLAYER',(str(player_num) + self.workingInitials + self.currentLetter + '_'),seconds=0,justify='center')
 
 	def enterInitialsStage3(self,player_num,new_position):
-		self.game.utilities.displayText(2000,topText='HIGH SCORE',bottomText='PLAYER ' + str(player_num) + self.workingInitials + self.currentLetter,seconds=0,justify='center')
+		self.game.utilities.displayText(2000,'HIGH', 'SCORE','PLAYER',(str(player_num) + self.workingInitials + self.currentLetter),seconds=0,justify='center')
 
 	def setLetter(self):
 		if (self.currentPosition == 1):

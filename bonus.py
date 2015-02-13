@@ -71,15 +71,15 @@ class Bonus(game.Mode):
 		script.append({'top':'TRANSITION 3','bottom':'TRANSITION 3','timer':2,'transition':3})
 		script.append({'top':'TRANSITION 4','bottom':'TRANSITION 4','timer':2,'transition':4})
 		#Cancel any score display scripts that may be running
-		self.game.alpha_score_display.cancel_script()
-		self.game.alpha_score_display.set_script(script)
+		self.game.score_display.cancel_script()
+		self.game.score_display.set_script(script)
 
 	def dummy_handler(self):
 		print 'sat here two seconds...'
 		pass
 
 	def multiplier(self):
-		self.game.utilities.displayText(priority=self.priority,topText='X'+str(self.game.utilities.get_player_stats('bonus_x')).upper(),bottomText=locale.format("%d", self.total_value, True),justify='center',seconds=self.delay_time)
+		self.game.utilities.displayText(self.priority,'X',str(self.game.utilities.get_player_stats('bonus_x')),'','',justify='center',seconds=self.delay_time)
 		self.game.sound.play('bonus_features')
 		self.game.lampctrlflash.play_show('bonus_feat_right', repeat=False)
 		self.game.utilities.setBackboxLED(255,0,0,pulsetime=100)
@@ -87,7 +87,7 @@ class Bonus(game.Mode):
 
 	def total(self):
 		self.game.utilities.score(self.total_value) # this should upadte the player score in question
-		self.game.utilities.displayText(priority=self.priority,topText=locale.format("%d", self.game.utilities.currentPlayerScore(), True),justify='center',seconds=self.delay_time)
+		self.game.utilities.displayText(self.priority, locale.format("%d", self.game.utilities.currentPlayerScore(), True),'','','',justify='center',seconds=self.delay_time)
 		self.game.sound.play('bonus_total')
 		#self.game.utilities.acFlashSchedule(coilname='lowerRamp_EnergyFlashers',schedule=0x00CCCCCC, cycle_seconds=1, now=True)
 		#self.game.utilities.acFlashSchedule(coilname='outholeKicker_Knocker',schedule=0x00CCCCCC, cycle_seconds=1, now=True)

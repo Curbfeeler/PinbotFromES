@@ -43,8 +43,8 @@ from time import strftime
 ###################################
 from base import *
 from attract import *
-import scoredisplay.scoredisplay
-from scoredisplay.scoredisplay import AlphaScoreDisplay #test and see about converting this to *
+from scoredisplay.alphanumeric import *
+from scoredisplay.scoredisplay import *
 from chest import *
 from skillshot import *
 from utilities import *
@@ -80,6 +80,7 @@ locale.setlocale(locale.LC_ALL, "")
 ################################################
 game_machine_type = 'wpcAlphanumeric'
 curr_file_path = os.path.dirname(os.path.abspath( __file__ ))
+alphabits_path = curr_file_path + "/scoredisplay/alpha_display/"
 settings_path = curr_file_path + "/config/settings.yaml"
 game_data_path = curr_file_path + "/config/game_data.yaml"
 game_data_template_path = curr_file_path + "/config/game_data_template.yaml"
@@ -111,6 +112,21 @@ class PinbotFromES(game.BasicGame):
 		# logging.basicConfig(filename='gamelog.txt',level=logging.INFO)
 		logging.basicConfig(level=logging.INFO, format="%(asctime)s - %(name)s - %(levelname)s - %(message)s")
 		
+		# MJO - CHANGE TO USE ALPHA
+		#### Setup Alphanumeric Display Controller ####
+		self.draw_desktop = True # config.value_for_key_path(keypath='virt_alpha_desktop', default=False)
+		if self.draw_desktop:
+			from desktop import Desktop
+			self.desktop = Desktop()
+			self.desktop.draw_window()
+
+			self.desktop.load_images(alphabits_path)
+			
+                #setup score display
+                self.alpha_display = AlphanumericDisplay(self.aux_port)
+                self.score_display = AlphaScoreDisplay(self, 0)		
+
+
 
 		#### Settings and Game Data ####
 		self.load_settings(settings_template_path, settings_path)
@@ -152,22 +168,9 @@ class PinbotFromES(game.BasicGame):
 		for category in self.highscore_categories:
 			category.load_from_game(self)
 
-		# MJO - CHANGE TO USE ALPHA
-		#### Setup Alphanumeric Display Controller ####
-		self.draw_desktop = True # config.value_for_key_path(keypath='virt_alpha_desktop', default=False)
-		if self.draw_desktop:
-			from desktop import Desktop
-			self.desktop = Desktop()
-			self.desktop.draw_window()
 
-			self.desktop.load_images(curr_file_path+"/alpha_display/")
 
-		#setup score display
-		self.score_display = AlphaScoreDisplay(self, 0)
-
-		self.alpha_score_display = AlphaScoreDisplay(self,0)
-		self.modes.add(self.alpha_score_display)
-		
+	
 		#### Setup Sound Controller ####
 		#self.sound = procgame.sound.SoundController(self)
 		#self.RegisterSound()
@@ -239,10 +242,10 @@ class PinbotFromES(game.BasicGame):
 		self.sound.register_music('multiball_loop2', game_music_path + 'ELO_HereIsTheNews_QuickIntro.ogg')
 		self.sound.register_music('game_over2', game_music_path + 'Didier Marouani - Temps X (1979 Music Video).mp3')
 
-		self.sound.register_music('main3', game_music_path + 'Transvolta_DiscoComputer.mp3')
-		self.sound.register_music('shooter3', game_music_path + 'DigitalEmotion_GoGoYellowScreen_90secondShooterLoop.wav')
-		self.sound.register_music('multiball_intro3', game_music_path + 'Automat_Droid.mp3')
-		self.sound.register_music('multiball_loop3', game_music_path + 'ELO_HereIsTheNews.mp3')
+		self.sound.register_music('main3', game_music_path + 'Lifelike - So Electric.mp3')
+		self.sound.register_music('shooter3', game_music_path + 'SpaceHogLoop.ogg')
+		self.sound.register_music('multiball_intro3', game_music_path + 'Rockets - Cosmic race.mp3')
+		self.sound.register_music('multiball_loop3', game_music_path + 'Kraftwerk- das Modell.mp3')
 		self.sound.register_music('game_over3', game_music_path + 'TheDroids_TheForcePartsIandII.mp3')
 
 		# Sound FX Registration

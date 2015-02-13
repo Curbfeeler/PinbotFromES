@@ -76,7 +76,7 @@ class BaseGameMode(game.Mode):
 		self.game.add_player() #will be first player at this point
 		self.game.ball = 1
 		self.start_ball()
-		self.game.utilities.updateBaseDisplay()
+		#self.game.utilities.updateBaseDisplay()
 
 		#self.game.sound.play('game_start')
 
@@ -86,6 +86,7 @@ class BaseGameMode(game.Mode):
 
 		#### Update Audits ####
 		self.game.game_data['Audits']['Balls Played'] += 1
+		#self.game.utilities.arduino_write_number(number=self.game.ball)
 		self.game.save_game_data()
 		
 		#### Set Diagnostic LED ####
@@ -111,7 +112,7 @@ class BaseGameMode(game.Mode):
 
 
 		#### Update Player Display ####
-		self.game.utilities.updateBaseDisplay()
+		#self.game.utilities.updateBaseDisplay()
 
 		#### Enable GI in case it is disabled from TILT ####
 		self.game.utilities.enableGI()
@@ -127,7 +128,9 @@ class BaseGameMode(game.Mode):
 	def finish_ball(self):
 
 		self.log.info("Calling: BaseGameMode.finish_ball")
-		self.game.utilities.displayText(102,'FINISH','BALL',seconds=.5,justify='center')
+
+                                             #topLeft7='XXXXXXX', topRight7='XXXXXXX',bottomLeft7='8888888',bottomRight7='8888888'
+ 		#self.game.utilities.displayText(102,'FINISH','BALL','','',seconds=.5,justify='center')
 		# Remove Drops mode because of delay issue #
 		self.game.modes.remove(self.game.drops_mode)
 
@@ -135,35 +138,29 @@ class BaseGameMode(game.Mode):
 		
 		if self.game.tiltStatus == 0:
 			self.game.bonus_mode.calculate(self.game.base_mode.finish_ball)
-			#### Script List Variable Initialization ####
-			script=[]
 			
 			myBonus = self.game.utilities.get_player_stats('bonus')
 			if myBonus > 0:
 				myMultiplier = self.game.utilities.get_player_stats('bonus_x')
 				if myMultiplier == 1:
-					self.game.utilities.displayText(102,'END BALL BONUS',locale.format("%d", myBonus, grouping=True),seconds=5,justify='center')
+					self.game.utilities.displayText(102,'END','BALL','BONUS',myBonus,seconds=5,justify='center')
 				else:
-					self.game.utilities.displayText(102,'END BALL BONUS',locale.format("%d", myBonus, grouping=True) +' X' +str(myMultiplier),seconds=5,justify='center')
-					for x in range(1, myMultiplier):
-						myNewBonus = myBonus + myBonus
-						self.game.utilities.displayText(102,'END BALL BONUS',locale.format("%d", myNewBonus, grouping=True) +' X' +str(myMultiplier-x),seconds=5,justify='center')						
-				self.game.utilities.score(myBonus*myMultiplier)
+					self.game.utilities.displayText(102,'END','BALL', 'BONUSX'+str(myMultiplier),seconds=5,justify='center')
+					self.game.utilities.score(myBonus*myMultiplier)
 			else:
-				self.game.utilities.displayText(102,'END OF BALL','NO BONUS',seconds=5,justify='center')
+				self.game.utilities.displayText(102,'NO','BONUS','','',seconds=5,justify='center')
 			#if self.game.switches.leftEyeBall.is_closed() == True:
 					#self.game.Coils.('Dummy')
 			#if self.game.switches.rightEyeBall.is_closed() == True:
 					#self.game.Coils.('Dummy')
-			self.game.utilities.releaseStuckBalls()
-			if self.game.utilities.troughIsFull():
-				self.game.utilities.displayText(102,'TF','TRUE',seconds=1,justify='center')
-			else:
-				self.game.utilities.displayText(102,'TF','FALSE',seconds=1,justify='center')
-				
+			#self.game.utilities.releaseStuckBalls()
+			#if self.game.utilities.troughIsFull():
+				#self.game.utilities.displayText(102,'TF','TRUE',seconds=1,justify='center')
+			#else:
+				#self.game.utilities.displayText(102,'TF','FALSE',seconds=1,justify='center')
 
-
-			self.delay(delay=6,handler=self.end_ball)
+			self.delay(delay=1,handler=self.end_ball)
+			#self.end_ball
 
 		
 	def end_ball(self):
@@ -308,7 +305,7 @@ class BaseGameMode(game.Mode):
 		self.log.info("Calling: BaseGameMode.add_bonus")
 		mybonus = self.game.utilities.get_player_stats(bonusname)
 		self.game.utilities.set_player_stats(bonusname,mybonus + points)
-		self.game.utilities.displayText(100,'ENERGY',str(mybonus + points),seconds=.5,justify='center')
+		self.game.utilities.displayText(100,'ENERGY','BONUS',str(mybonus + points),'',seconds=.5,justify='center')
 		#print "player_stats('bonus',points)" +str(points)
 
 	###############################################################
@@ -359,21 +356,21 @@ class BaseGameMode(game.Mode):
 				#missing balls
 				self.log.info('missing balls')
 				self.game.utilities.releaseStuckBalls()
-				self.game.alpha_score_display.set_text("MISSING PINBALLS",0)
-				self.game.alpha_score_display.set_text("PLEASE WAIT",1)
+				self.game.utilities.displayText(200,'MISSING','BALLS','PLEASE','WAIT',seconds=1,justify='center')
 		elif self.game.ball == 1 and len(self.game.players) < 4:
 			self.game.add_player()
-			self.log.info('Player: ' + str(self.game.players.index) +' of ' +str(self.game.players.length))
+			#self.log.info('Player: ' + str(self.game.players.index) +' of ' +str(self.game.players.length))
 			self.log.info('Player Added - Total Players = ' + str(len(self.game.players)))			
 			if (len(self.game.players) == 2):
 				self.game.sound.play_voice('player_2_vox')
-				self.game.utilities.displayText(200,topText='PLAYER 2',bottomText='ADDED',seconds=1,justify='center')
+				                                     #'top':'2BCDEFGH2JKLMNOP','bottom':'0123456701234567'
+				self.game.utilities.displayText(200,'PLAYER', '2','ADDED','',seconds=1,justify='center')
 			elif (len(self.game.players) == 3):
 				self.game.sound.play_voice('player_3_vox')
-				self.game.utilities.displayText(200,topText='PLAYER 3',bottomText='ADDED',seconds=1,justify='center')
+				self.game.utilities.displayText(200,'PLAYER', '3','ADDED','',seconds=1,justify='center')
 			elif (len(self.game.players) == 4):
 				self.game.sound.play_voice('player_4_vox')
-				self.game.utilities.displayText(200,topText='PLAYER 4',bottomText='ADDED',seconds=1,justify='center')
+				self.game.utilities.displayText(200,'PLAYER', '4','ADDED','',seconds=1,justify='center')
 		else:
 			pass
 		self.log.info("Ready to Play!")

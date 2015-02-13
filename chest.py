@@ -79,7 +79,7 @@ class ChestMode(game.Mode):
 
 	def chestMade(self, iPoints):
 		self.chestFilled = True
-		self.game.utilities.displayText(100,'CHEST MADE',locale.format("%d", iPoints * self.game.utilities.get_player_stats('chestmade_x'), grouping=True) + ' POINTS',seconds=self.chestFilledDisplayTime,justify='center')
+		self.game.utilities.displayText(100,'CHEST', 'MADE',str(iPoints * self.game.utilities.get_player_stats('chestmade_x')), 'POINTS',seconds=self.chestFilledDisplayTime,justify='center')
 		self.game.utilities.score(iPoints * self.game.utilities.get_player_stats('chestmade_x'))
 		self.game.utilities.set_player_stats('chestmade_x',self.game.utilities.get_player_stats('chestmade_x') + 1)
 		self.game.lampctrlflash.play_show('skillshot', repeat=False, callback=self.game.update_lamps)
@@ -104,7 +104,7 @@ class ChestMode(game.Mode):
 			myrowdatadict = objPlayer.chestRowMatrix[iRowHit-1]
 			iSumDataDict = sum(myrowdatadict.values())
 			if iSumDataDict==5: #Already all complete!
-				self.game.utilities.displayText(100,'TRY DIFF','ROW PLEASE',seconds=1,justify='center')
+				self.game.utilities.displayText(100,'TRY', 'DIFF','ROW', 'PLEASE',seconds=1,justify='center')
 				pass
 			elif iSumDataDict==0: #No rows complete, no reason to "for loop" here 
 				self.game.lamps["chestMatrix" +str(iRowHit) +str(iColHit+1)].enable()
@@ -122,7 +122,7 @@ class ChestMode(game.Mode):
 								othercoldatadict[keyB] = True
 								if iSumDataDict == 4:
 									bOneRowKnownComplete = True
-									self.game.utilities.displayText(100,'ROW ' +str(iRowHit),'MADE',seconds=1,justify='center')								
+									self.game.utilities.displayText(100,'ROW', str(iRowHit),'MADE','',seconds=1,justify='center')								
 								break
 						break
 			#Now check to see if the entire matrix is made			
@@ -133,7 +133,7 @@ class ChestMode(game.Mode):
 			mycoldatadict = objPlayer.chestColMatrix[iColHit-1]
 			iSumDataDict = sum(mycoldatadict.values())
 			if iSumDataDict==5: #Already all complete!
-				self.game.utilities.displayText(100,'TRY DIFF','COL PLEASE',seconds=1,justify='center')
+				self.game.utilities.displayText(100,'TRY', 'DIFF','COL', 'PLEASE',seconds=1,justify='center')
 				pass
 			elif iSumDataDict==0: #No Cols complete, no reason to "for loop" here 
 				self.game.lamps["chestMatrix" +str(iRowHit+1) +str(iColHit)].enable()
@@ -151,7 +151,7 @@ class ChestMode(game.Mode):
 								otherrowdatadict[keyB] = True
 								if iSumDataDict == 4:
 									bOneColKnownComplete = True
-									self.game.utilities.displayText(100,'COL ' +str(iColHit),'MADE',seconds=1,justify='center')								
+									self.game.utilities.displayText(100,'COL', str(iColHit),'MADE', '',seconds=1,justify='center')								
 								break
 							
 						break

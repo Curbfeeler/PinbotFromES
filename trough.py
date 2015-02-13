@@ -63,7 +63,7 @@ class Trough(procgame.game.Mode):
 		self.drain_callback = drain_callback
 
                 self.extra_ball = False     # Is the ball sitting in the lane an extra ball awarded
-		#populate vars from yaml
+		#populate vars from yaml*
 		for switch in self.game.switches.items_tagged('trough'):
 			self.position_switchnames.append(switch.name)
 			self.log.info("Trough Switch is:"+switch.name)
@@ -97,20 +97,20 @@ class Trough(procgame.game.Mode):
 		# Install switch handlers.
 		# Use a delay of 750ms which should ensure balls are settled.
 		for switch in self.position_switchnames:
-			self.add_switch_handler(name=switch, event_type='active', delay=None, handler=self.position_switch_handler)
+			self.add_switch_handler(name=switch, event_type='active', delay=1.0, handler=self.position_switch_handler)
 
 		for switch in self.position_switchnames:
-			self.add_switch_handler(name=switch, event_type='inactive', delay=None, handler=self.position_switch_handler)
+			self.add_switch_handler(name=switch, event_type='inactive', delay=1.0, handler=self.position_switch_handler)
 
 		# Install early ball_save switch handlers.
 		#for switch in self.early_save_switchnames:
 			#self.add_switch_handler(name=switch, event_type='active', delay=None, handler=self.early_save_switch_handler)
 
 		# Install outhole switch handler.
-		self.add_switch_handler(name=self.outhole_switchname, event_type='active', delay=0, handler=self.outhole_switch_handler)
+		#self.add_switch_handler(name=self.outhole_switchname, event_type='active', delay=.20, handler=self.outhole_switch_handler)
 
                 # Install shooter lane handler
-                self.add_switch_handler(name=self.shooter_lane_switchname, event_type='active', delay=0.75, handler=self.shooter_lane_switch_handler)
+                self.add_switch_handler(name=self.shooter_lane_switchname, event_type='active', delay=1.0, handler=self.shooter_lane_switch_handler)
 		# Reset variables
 
                 # This is the number of balls not in the trough or locks, so physically in play
@@ -139,8 +139,10 @@ class Trough(procgame.game.Mode):
 		#self.debug()
 
 	def debug(self):
-		self.log.info("B-IN-PLY"+str(self.num_balls_in_play) + ", B-LCKD" + str(self.num_balls_locked)+ ", TRO" + str(self.num_balls())+", player locks "+str(self.game.utilities.get_player_stats('balls_locked')))
+		self.log.info("BALL" +str(self.game.ball) +"/" +str(self.game.balls_per_game) +",B-IN-PLY"+str(self.num_balls_in_play) + ", B-LCKD" + str(self.num_balls_locked)+ ", TRO" + str(self.num_balls())+", player locks "+str(self.game.utilities.get_player_stats('balls_locked')))
+		#self.game.utilities.arduino_write_number(number=self.num_balls())		
 		self.delay(name='launch', event_type=None, delay=1.0, handler=self.debug)
+		
 
 	def state_str(self):
 		return '%d/%d balls' % (self.num_balls(), self.game.num_balls_total)
@@ -158,41 +160,47 @@ class Trough(procgame.game.Mode):
 				#self.launch_balls(1, self.ball_save_callback, stealth=True)
 
 		#add handler for outhole
-	def outhole_switch_handler(self,sw):
+	#def sw_outhole_active_for_500ms(self, sw):
+	def sw_outhole_closed_for_1s(self, sw):
+	#def outhole_switch_handler(self,sw):
 		self.log.info('Outhole switch handler')
 
 		self.log.info("Balls in play before pulse = "+str(self.num_balls_in_play))
 		self.log.info("Balls in trough before pulse = "+str(self.num_balls()))			
 
+		#self.delay(name='dummy', event_type=None, delay=1.0, handler=self.dummy)
                 # Kick the ball into the trough
 		self.game.utilities.acCoilPulse('outholeKicker_Knocker')
 		if self.num_balls_in_play > 0:
 			self.num_balls_in_play -= 1
+			
+		self.delay(name='dummy', event_type=None, delay=1.0, handler=self.dummy)			
 
-		self.log.info("Balls in play before pulse = "+str(self.num_balls_in_play))
-		self.log.info("Balls in trough before pulse = "+str(self.num_balls()))			
+		self.log.info("Balls in play after pulse = "+str(self.num_balls_in_play))
+		self.log.info("Balls in trough after pulse = "+str(self.num_balls()))			
 
 
                 # Schedule a call for one second from now to let things settle
-                self.delay('outhole_recheck',delay=1.5,handler=self.outhole_recheck)
+                self.delay('outhole_recheck',delay=1.0,handler=self.outhole_recheck)
 
         # Called one second after the outhole is handled.  Will call the handler again if there is still
         # a ball in the outhole, otherwise will continue with rest of outhole processing
         def outhole_recheck(self):
-            if self.game.switches.outhole.is_closed() == True:
-                self.outhole_switch_handler('Dummy')
-            else:
-                self.log.info('Outhole process check')
-                # If ball save is active, save it but wait first for one second for the trough to settle
-                if (self.game.utilities.get_player_stats('ballsave_active') == True):
-			self.game.ballsaver_mode.saveBall()
-                # If ball save isn't active, check for end of multiball
-                elif(self.game.utilities.get_player_stats('multiball_running') != 'None'):
-			self.checkForEndOfMultiball()
-                if self.num_balls_in_play == 0: #Last ball in play
-			self.game.utilities.setBallInPlay(False) # Will need to use the trough mode for this
-			self.game.base_mode.finish_ball()
-
+		#self.delay(name='dummy', event_type=None, delay=1.0, handler=self.dummy)
+		if self.game.switches.outhole.is_closed() == True:
+			self.log.info('Calling outhole_recheck, is_closed is true')
+			self.sw_outhole_closed_for_1s('Dummy')
+		else:
+			self.log.info('Calling outhole_recheck, is_closed is false')
+			# If ball save is active, save it but wait first for one second for the trough to settle
+			if (self.game.utilities.get_player_stats('ballsave_active') == True):
+				self.game.ballsaver_mode.saveBall()
+			# If ball save isn't active, check for end of multiball
+			elif(self.game.utilities.get_player_stats('multiball_running') != 'None'):
+				self.checkForEndOfMultiball()
+			if self.num_balls_in_play == 0: #Last ball in play
+				self.game.utilities.setBallInPlay(False) # Will need to use the trough mode for this
+				self.game.base_mode.finish_ball()
 
 	def checkForEndOfMultiball(self):
 		if (self.num_balls() >= 3 and self.game.utilities.get_player_stats('multiball_running') == 'Standard' ):
@@ -333,8 +341,8 @@ class Trough(procgame.game.Mode):
 			stealth should be used.
 		"""
 
-		#self.num_balls_to_launch = num
 		self.num_balls_to_launch += num
+		self.log.info('in launch_balls now self.num_balls_to_launch = ' +str(self.num_balls_to_launch))		
                 #self.autolaunch = autolaunch
 		#if stealth:
 			#self.num_balls_to_stealth_launch += num
@@ -348,21 +356,23 @@ class Trough(procgame.game.Mode):
 	def common_launch_code(self):
 		# Only kick out another ball if the last ball is gone from the 
 		# shooter lane.
-		self.log.info('Calling: common_launch_code')
 		
 		if self.game.switches[self.shooter_lane_switchname].is_inactive():
 			self.log.info('common_launch_code says... shooter is clear')
-
-			self.log.info("Balls in play before pulse = "+str(self.num_balls_in_play))
-			self.log.info("Balls in trough before pulse = "+str(self.num_balls()))			
-
+			self.num_balls_to_launch -= 1
+			#self.log.info("Balls in play before pulse = "+str(self.num_balls_in_play))
+			#self.log.info("Balls in trough before pulse = "+str(self.num_balls()))			
+			self.delay(name='dummy', event_type=None, delay=1.0, handler=self.dummy)
 			#pulse coil
 			self.game.utilities.acCoilPulse(coilname='feedShooter_UpperPFFLash',pulsetime=100)
-			self.num_balls_to_launch -= 1
-			self.num_balls_in_play += 1
-			
-			self.log.info("Balls in play after pulse = "+str(self.num_balls_in_play))
-			self.log.info("Balls in trough after pulse = "+str(self.num_balls()))			
+			self.delay(name='dummy', event_type=None, delay=1.0, handler=self.dummy)
+
+			#if self.game.switches[self.shooter_lane_switchname].is_active():
+			#self.num_balls_to_launch -= 1
+			#self.num_balls_in_play += 1
+				
+			#self.log.info("Balls in play after pulse = "+str(self.num_balls_in_play))
+			#self.log.info("Balls in trough after pulse = "+str(self.num_balls()))			
 			
 
                         #If the ball in the shooter lane is an extra ball which a player has been awarded
@@ -376,12 +386,12 @@ class Trough(procgame.game.Mode):
                             
                         self.update_lamps()
 
-			## Only increment num_balls_in_play if there are no more 
-			## stealth launches to complete.
-			#if self.num_balls_to_stealth_launch > 0:
-				#self.num_balls_to_stealth_launch -= 1
-			#else:
-				#self.num_balls_in_play += 1
+			# Only increment num_balls_in_play if there are no more 
+			# stealth launches to complete.
+			if self.num_balls_to_stealth_launch > 0:
+				self.num_balls_to_stealth_launch -= 1
+			else:
+				self.num_balls_in_play += 1
 			# If more balls need to be launched, delay 1 second 
 			if self.num_balls_to_launch > 0:
 				self.delay(name='launch', event_type=None, delay=1.0, handler=self.common_launch_code)
@@ -391,8 +401,13 @@ class Trough(procgame.game.Mode):
 					self.launch_callback()
 		# Otherwise, wait 1 second before trying again.
 		else:
+			self.log.info('common_launch_code says... shooter not clear')
 			self.delay(name='launch', event_type=None, delay=1.0, \
 				   handler=self.common_launch_code)
+
+	def dummy(self):
+		self.log.info('Calling: dummy')
+		pass
 
 	def shooter_lane_switch_handler(self,sw):
 		self.log.info("Placeholder until autolauncher works")

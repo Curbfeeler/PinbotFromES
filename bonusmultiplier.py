@@ -62,7 +62,7 @@ class BonusMultiplier(game.Mode):
 		self.multiplier = self.game.utilities.get_player_stats('bonus_x')
 		if (self.multiplier <> 5):
 			self.game.utilities.log('BALLSAVE - Ouhole closed - SwitchContinue','info')
-			self.game.utilities.displayText(100,'BONUS AT',str(self.multiplier + 1) +'X',seconds=1,justify='center')
+			self.game.utilities.displayText(100,'BONUS', 'AT',str(self.multiplier + 1) +'X','',seconds=1,justify='center')
 			self.game.utilities.set_player_stats('bonus_x',self.multiplier + 1)
 			self.update_lamps()
 		else:
